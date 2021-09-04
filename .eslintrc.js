@@ -39,5 +39,6 @@ module.exports = {
         "simple-import-sort/exports": "error",
         "unicorn/filename-case": "off",
         "unicorn/prefer-module": "off",
+        "jsx-a11y/anchor-is-valid": "off",
     },
 };
