@@ -40,5 +40,6 @@ module.exports = {
         "unicorn/filename-case": "off",
         "unicorn/prefer-module": "off",
         "jsx-a11y/anchor-is-valid": "off",
+        "unicorn/no-null": "off",
     },
 };
