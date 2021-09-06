@@ -1,4 +1,5 @@
 import {
+    Billboard,
     ContactShadows,
     Environment,
     OrbitControls,
@@ -14,20 +15,23 @@ export default function NewCanvas() {
         <Canvas
             shadows
             dpr={[1, 2]}
+            gl={{ alpha: true, stencil: false, antialias: true }}
             style={{ width: "50vw", height: "100vh", overflowX: "hidden" }}
         >
             <ambientLight intensity={0.5} />
             <Suspense fallback={null}>
                 <BlackberryCan />
-                <Text
-                    color="black"
-                    anchorX="center"
-                    anchorY="center"
-                    position={[0, -2.75, 0]}
-                    fontSize={0.2}
-                >
-                    Drag me!
-                </Text>
+                <Billboard follow="true">
+                    <Text
+                        color="whitesmoke"
+                        anchorX="center"
+                        anchorY="center"
+                        position={[0, -3, 0]}
+                        fontSize={0.2}
+                    >
+                        Drag to explore
+                    </Text>
+                </Billboard>
                 <Environment preset="city" />
                 <ContactShadows
                     rotation-x={Math.PI / 2}

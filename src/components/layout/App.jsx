@@ -2,6 +2,8 @@ import "../../styles/App.css";
 
 import { Text } from "@chakra-ui/react";
 
+import Background from "./Background";
+import Header from "./Header";
 import NewCanvas from "./NewCanvas";
 
 function App() {
@@ -15,7 +17,9 @@ function App() {
                     backgroundColor: "#eeeeee",
                 }}
             >
-                <div style={{ display: "flex" }}>
+                <Header />
+                <Background />
+                <div style={{ display: "flex", zIndex: 2 }}>
                     <div
                         style={{
                             width: "50vw",
@@ -28,15 +32,14 @@ function App() {
                     >
                         <Text
                             as="h1"
-                            bgGradient="linear(to-l, #7928CA,#FF0080)"
-                            bgClip="text"
                             fontSize="6xl"
-                            fontWeight="extrabold"
+                            color="whitesmoke"
+                            style={{ zIndex: 2 }}
                         >
-                            Welcome to Chakra UI
+                            (6xl) In love with React & Next
                         </Text>
                     </div>
-                    <div style={{ overflow: "hidden" }}>
+                    <div style={{ maxWidth: "50vw", overflow: "hidden" }}>
                         <NewCanvas />
                     </div>
                 </div>
@@ -53,7 +56,7 @@ function App() {
                         viewBox="0 0 1200 120"
                         xmlns="http://www.w3.org/2000/svg"
                         style={{
-                            fill: "#232c65ff",
+                            fill: "#f1c7b9",
                             width: "100%",
                             height: 107,
                             transform: "rotate(180deg)",
@@ -63,13 +66,13 @@ function App() {
                     </svg>
                 </div>
             </div>
-            <div
+            {/* <div
                 style={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundColor: "#232c65ff",
+                    backgroundColor: "#fff",
                 }}
-            />
+            ></div> */}
         </>
     );
 }

@@ -41,5 +41,6 @@ module.exports = {
         "unicorn/prefer-module": "off",
         "jsx-a11y/anchor-is-valid": "off",
         "unicorn/no-null": "off",
+        "unicorn/no-abusive-eslint-disable": "off",
     },
 };
