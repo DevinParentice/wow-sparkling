@@ -6,6 +6,12 @@ export default function ShoppingBag3FillIcon({
     showCart,
     iconColor,
 }) {
+    const fadeIn = { delay: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+    // const changeColor = {
+    //     delay: 1,
+    //     duration: 0.5,
+    //     ease: [0.43, 0.13, 0.23, 0.96],
+    // };
     return (
         <motion.svg
             viewBox="0 0 24 24"
@@ -14,8 +20,9 @@ export default function ShoppingBag3FillIcon({
             height="3em"
             width="3em"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, transition: fadeIn }}
             whileHover={{ scale: 1.1, cursor: "pointer" }}
+            whileTap={{ color: iconColor, transition: fadeIn }}
             onClick={() => showCart(!cartState)}
         >
             <path fill="none" d="M0 0h24v24H0z" />

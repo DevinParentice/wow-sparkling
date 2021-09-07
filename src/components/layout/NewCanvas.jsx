@@ -1,16 +1,11 @@
-import {
-    Billboard,
-    ContactShadows,
-    Environment,
-    OrbitControls,
-    Text,
-} from "@react-three/drei";
+import { Billboard, OrbitControls, Stage, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
+import React, { Suspense, useRef } from "react";
 
 import BlackberryCan from "../models/BlackberryCan";
 
 export default function NewCanvas() {
+    const controls = useRef();
     return (
         <Canvas
             shadows
@@ -20,30 +15,36 @@ export default function NewCanvas() {
         >
             <ambientLight intensity={0.5} />
             <Suspense fallback={null}>
-                <BlackberryCan />
-                <Billboard follow="true">
-                    <Text
-                        color="whitesmoke"
-                        anchorX="center"
-                        anchorY="center"
-                        position={[0, -3, 0]}
-                        fontSize={0.2}
-                    >
-                        Drag to explore
-                    </Text>
-                </Billboard>
-                <Environment preset="city" />
-                <ContactShadows
-                    rotation-x={Math.PI / 2}
-                    position={[0, -5, 0]}
-                    opacity={0.25}
-                    width={100}
-                    height={100}
-                    blur={1.5}
-                    far={0.8}
-                />
+                <Stage
+                    controls={controls}
+                    preset="rembrandt"
+                    intensity={1}
+                    contactShadow
+                    shadows
+                    adjustCamera
+                    environment="city"
+                >
+                    <BlackberryCan />
+                    <Billboard follow="true">
+                        <Text
+                            color="whitesmoke"
+                            anchorX="center"
+                            anchorY="center"
+                            position={[0, -3, 0]}
+                            fontSize={0.2}
+                        >
+                            Drag to explore
+                        </Text>
+                    </Billboard>
+                </Stage>
             </Suspense>
-            <OrbitControls enableZoom={false} />
+            <OrbitControls
+                ref={controls}
+                enableZoom={false}
+                enablePan={false}
+                minPolarAngle={Math.PI / 2}
+                maxPolarAngle={Math.PI / 2}
+            />
         </Canvas>
     );
 }
