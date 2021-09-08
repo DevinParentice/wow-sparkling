@@ -1,9 +1,10 @@
 import { Text } from "@chakra-ui/react";
 import React from "react";
+import { Link } from "wouter";
 
-import Background from "../components/layout/Background";
-import Header from "../components/layout/Header";
-import NewCanvas from "../components/layout/NewCanvas";
+import Background from "../layout/Background";
+import Header from "../layout/Header";
+import NewCanvas from "../layout/NewCanvas";
 
 export default function Home() {
     return (
@@ -29,14 +30,22 @@ export default function Home() {
                             flexWrap: "wrap",
                         }}
                     >
-                        <Text
-                            as="h1"
-                            fontSize="6xl"
-                            color="whitesmoke"
-                            style={{ zIndex: 2 }}
-                        >
-                            (6xl) In love with React & Next
-                        </Text>
+                        <div style={{ zIndex: 2, marginLeft: "5rem" }}>
+                            <Text as="h1" fontSize="5xl" color="whitesmoke">
+                                Add a little{" "}
+                                <em>
+                                    <strong>WoW</strong>
+                                </em>{" "}
+                                to your life
+                            </Text>
+                            <Text as="h2" fontSize="2xl" color="whitesmoke">
+                                All natural alcohol-free beverages to empower
+                                your choice to drink
+                            </Text>
+                            <Link to="/shop">
+                                <a>Shop Now</a>
+                            </Link>
+                        </div>
                     </div>
                     <div style={{ maxWidth: "50vw", overflow: "hidden" }}>
                         <NewCanvas />

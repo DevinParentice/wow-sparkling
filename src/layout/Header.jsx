@@ -1,10 +1,14 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { Link } from "wouter";
 
+import CartIcon from "../assets/icons/CartIcon";
+import WhiteLogo from "../assets/images/wow-logo-white.png";
 import Cart from "./Cart";
-import CartIcon from "./icons/CartIcon";
 
 export default function Header() {
     const [showCart, setShowCart] = useState(false);
+    const fadeIn = { delay: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
     return (
         <div
             style={{
@@ -22,7 +26,17 @@ export default function Header() {
             }}
         >
             <CartIcon cartState={showCart} showCart={setShowCart} />
-            <CartIcon cartState={showCart} showCart={setShowCart} />
+            <Link to="/">
+                <a>
+                    <motion.img
+                        src={WhiteLogo}
+                        alt="Logo"
+                        height="50px"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, transition: fadeIn }}
+                    />
+                </a>
+            </Link>
             <CartIcon
                 cartState={showCart}
                 showCart={setShowCart}

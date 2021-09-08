@@ -4,14 +4,30 @@
     box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+* {
+    overflow: -moz-scrollbars-none;
+    font-family: "Sharp Grotesk", BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 html,
 body {
     width: 100%;
     height: 100%;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family: "Sharp Grotesk";
+    src: local("Sharp Grotesk"),
+        url(../assets/fonts/SharpGrotesk.woff2) format("woff2"),
+        url(../assets/fonts/SharpGrotesk.ttf) format("truetype");
+    font-display: swap;
 }

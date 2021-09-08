@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import "../../styles/App.css";
+import "../styles/App.css";
 
 /*
  *   Stripe WebGl Gradient Animation
