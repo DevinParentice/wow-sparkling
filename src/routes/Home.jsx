@@ -32,11 +32,11 @@ export default function Home() {
                     >
                         <div style={{ zIndex: 2, marginLeft: "5rem" }}>
                             <Text as="h1" fontSize="5xl" color="whitesmoke">
-                                Add a little{" "}
+                                Add a little&nbsp;
                                 <em>
                                     <strong>WoW</strong>
-                                </em>{" "}
-                                to your life
+                                </em>
+                                &nbsp; to your life
                             </Text>
                             <Text as="h2" fontSize="2xl" color="whitesmoke">
                                 All natural alcohol-free beverages to empower

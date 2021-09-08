@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Squash as Hamburger } from "hamburger-react";
 import React, { useState } from "react";
 import { Link } from "wouter";
 
@@ -8,6 +9,7 @@ import Cart from "./Cart";
 
 export default function Header() {
     const [showCart, setShowCart] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const fadeIn = { delay: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
     return (
         <div
@@ -25,7 +27,14 @@ export default function Header() {
                 paddingTop: "2rem",
             }}
         >
-            <CartIcon cartState={showCart} showCart={setShowCart} />
+            <Hamburger
+                toggled={showMenu}
+                toggle={setShowMenu}
+                color="white"
+                size={42}
+                rounded
+                label="Show Menu"
+            />
             <Link to="/">
                 <a>
                     <motion.img
