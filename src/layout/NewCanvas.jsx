@@ -24,7 +24,7 @@ export default function NewCanvas() {
                 <PineappleCan />
                 <Billboard>
                     <Text
-                        color="smokewhite"
+                        color="whitesmoke"
                         anchorX="center"
                         anchorY="center"
                         position={[0, -2.75, 0]}

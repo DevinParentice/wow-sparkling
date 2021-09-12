@@ -1,14 +1,18 @@
 import "./styles/App.css";
 
-import { Route, Switch } from "wouter";
+import { AnimatePresence } from "framer-motion";
+import { Route, Switch, useLocation } from "wouter";
 
 import Home from "./routes/Home";
 
 function App() {
+    const [location] = useLocation();
     return (
         <>
-            <Switch>
-                <Route path="/" component={Home} />
+            <Switch location={location} key={location.key}>
+                <AnimatePresence exitBeforeEnter>
+                    <Route path="/" component={Home} />
+                </AnimatePresence>
             </Switch>
         </>
     );

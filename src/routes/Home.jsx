@@ -1,4 +1,5 @@
 import { Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "wouter";
 
@@ -7,6 +8,8 @@ import Header from "../layout/Header";
 import NewCanvas from "../layout/NewCanvas";
 
 export default function Home() {
+    const MotionText = motion(Text);
+    const fadeIn = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
     return (
         <>
             <div
@@ -31,19 +34,48 @@ export default function Home() {
                         }}
                     >
                         <div style={{ zIndex: 2, marginLeft: "5rem" }}>
-                            <Text as="h1" fontSize="5xl" color="whitesmoke">
+                            <MotionText
+                                as="h1"
+                                fontSize="6rem"
+                                color="whitesmoke"
+                                initial={{ opacity: 0, x: -200 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5, ...fadeIn }}
+                            >
                                 Add a little&nbsp;
                                 <em>
                                     <strong>WoW</strong>
                                 </em>
                                 &nbsp; to your life
-                            </Text>
-                            <Text as="h2" fontSize="2xl" color="whitesmoke">
+                            </MotionText>
+                            <MotionText
+                                as="h2"
+                                fontSize="1.625rem"
+                                color="whitesmoke"
+                                style={{ marginBottom: "3rem" }}
+                                initial={{ opacity: 0, x: -200 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.75, ...fadeIn }}
+                            >
                                 All natural alcohol-free beverages to empower
                                 your choice to drink
-                            </Text>
+                            </MotionText>
                             <Link to="/shop">
-                                <a>Shop Now</a>
+                                <motion.a
+                                    style={{
+                                        backgroundColor: "whitesmoke",
+                                        padding: "1.875rem 4rem",
+                                        borderRadius: "0.375rem",
+                                        fontSize: "1.25rem",
+                                        boxShadow:
+                                            "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                                    }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 1.2, ...fadeIn }}
+                                >
+                                    Shop Now
+                                </motion.a>
                             </Link>
                         </div>
                     </div>

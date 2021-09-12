@@ -4,15 +4,17 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 
 import CartIcon from "../assets/icons/CartIcon";
+import BlackLogo from "../assets/images/wow-logo-black.png";
 import WhiteLogo from "../assets/images/wow-logo-white.png";
 import Cart from "./Cart";
+import Menu from "./Menu";
 
 export default function Header() {
     const [showCart, setShowCart] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const fadeIn = { delay: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
     return (
-        <div
+        <motion.div
             style={{
                 width: "100vw",
                 height: "4rem",
@@ -26,32 +28,37 @@ export default function Header() {
                 padding: "0 5rem",
                 paddingTop: "2rem",
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: fadeIn }}
         >
-            <Hamburger
-                toggled={showMenu}
-                toggle={setShowMenu}
-                color="white"
-                size={42}
-                rounded
-                label="Show Menu"
-            />
-            <Link to="/">
-                <a>
-                    <motion.img
-                        src={WhiteLogo}
-                        alt="Logo"
-                        height="50px"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1, transition: fadeIn }}
-                    />
-                </a>
-            </Link>
+            <div style={{ zIndex: 6 }}>
+                <Hamburger
+                    toggled={showMenu}
+                    toggle={setShowMenu}
+                    color={showMenu ? "black" : "white"}
+                    size={42}
+                    rounded
+                    label="Show Menu"
+                />
+            </div>
+            <div style={{ zIndex: 6 }}>
+                <Link to="/">
+                    <a>
+                        <img
+                            src={showMenu ? BlackLogo : WhiteLogo}
+                            alt="Logo"
+                            height="50px"
+                        />
+                    </a>
+                </Link>
+            </div>
             <CartIcon
                 cartState={showCart}
                 showCart={setShowCart}
                 iconColor={showCart ? "black" : "white"}
             />
             <Cart showSelf={showCart} />
-        </div>
+            <Menu showSelf={showMenu} />
+        </motion.div>
     );
 }
