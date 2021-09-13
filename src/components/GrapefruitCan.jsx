@@ -36,4 +36,4 @@ export default function Model(properties) {
     );
 }
 
-useGLTF.preload("/grapefruitcan.glb");
+useGLTF.preload("/models/grapefruitcan.glb");

@@ -26,8 +26,7 @@ body {
 
 @font-face {
     font-family: "Sharp Grotesk";
-    src: local("Sharp Grotesk"),
-        url(../assets/fonts/SharpGrotesk.woff2) format("woff2"),
-        url(../assets/fonts/SharpGrotesk.ttf) format("truetype");
+    src: local("Sharp Grotesk"), url(/fonts/SharpGrotesk.woff2) format("woff2"),
+        url(/fonts/SharpGrotesk.ttf) format("truetype");
     font-display: swap;
 }

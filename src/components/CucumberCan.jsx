@@ -36,4 +36,4 @@ export default function Model(properties) {
     );
 }
 
-useGLTF.preload("/cucumbercan.glb");
+useGLTF.preload("/models/cucumbercan.glb");

@@ -36,4 +36,4 @@ export default function Model(properties) {
     );
 }
 
-useGLTF.preload("/blackberrycan.glb");
+useGLTF.preload("/models/blackberrycan.glb");
