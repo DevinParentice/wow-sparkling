@@ -1,4 +1,4 @@
-import "./styles/App.css";
+import "./styles/App.scss";
 
 import { AnimatePresence } from "framer-motion";
 import React from "react";
