@@ -28,9 +28,10 @@ export default function NewCanvas() {
                         anchorX="center"
                         anchorY="center"
                         position={[0, -2.75, 0]}
-                        fontSize={0.2}
+                        fontSize={0.25}
+                        font="/fonts/SharpGrotesk.ttf"
                     >
-                        Drag me!
+                        Drag to explore
                     </Text>
                 </Billboard>
 

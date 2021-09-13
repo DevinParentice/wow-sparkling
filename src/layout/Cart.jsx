@@ -10,7 +10,7 @@ export default function Cart({ showSelf }) {
                     style={{
                         height: "100vh",
                         width: "400px",
-                        position: "absolute",
+                        position: "fixed",
                         top: 0,
                         right: 0,
                         zIndex: 3,

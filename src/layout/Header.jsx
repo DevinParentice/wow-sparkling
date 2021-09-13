@@ -18,7 +18,7 @@ export default function Header() {
             style={{
                 width: "100vw",
                 height: "4rem",
-                position: "absolute",
+                position: "fixed",
                 top: 0,
                 left: 0,
                 zIndex: 4,

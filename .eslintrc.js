@@ -30,6 +30,7 @@ module.exports = {
     ],
     plugins: ["react", "prettier", "simple-import-sort", "unicorn"],
     rules: {
+        "import/no-named-as-default": "off",
         "prettier/prettier": ["error", { endOfLine: "auto" }],
         "react/jsx-props-no-spreading": "off",
         "react/prop-types": "off",

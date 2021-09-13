@@ -106,13 +106,13 @@ export default function Home() {
                     </svg>
                 </div>
             </div>
-            {/* <div
+            <div
                 style={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#f1c7b9",
                 }}
-            ></div> */}
+            />
         </>
     );
 }
