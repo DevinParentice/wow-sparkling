@@ -9,7 +9,11 @@ import NewCanvas from "../layout/NewCanvas";
 
 export default function Home() {
     const MotionText = motion(Text);
-    const fadeIn = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+    const fadeIn = {
+        duration: 0.6,
+        ease: [0.43, 0.13, 0.23, 0.96],
+        scale: { delay: 0 },
+    };
     return (
         <>
             <div
@@ -38,6 +42,9 @@ export default function Home() {
                                 zIndex: 2,
                                 marginLeft: "5rem",
                                 userSelect: "none",
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
                             }}
                         >
                             <MotionText
@@ -47,13 +54,16 @@ export default function Home() {
                                 initial={{ opacity: 0, x: -200 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5, ...fadeIn }}
-                                marginRight="6rem"
                             >
-                                Add a little&nbsp;
-                                <em>
-                                    <strong>WoW</strong>
-                                </em>
-                                &nbsp; to your life
+                                Add a little{" "}
+                                <span>
+                                    <em>
+                                        <strong>WoW</strong>
+                                    </em>
+                                </span>{" "}
+                                to
+                                <br />
+                                your life
                             </MotionText>
                             <MotionText
                                 as="h2"
@@ -83,7 +93,8 @@ export default function Home() {
                                     }}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ delay: 1.2, ...fadeIn }}
+                                    transition={{ delay: 1, ...fadeIn }}
+                                    whileHover={{ scale: 1.05 }}
                                 >
                                     Shop Now
                                 </motion.a>
