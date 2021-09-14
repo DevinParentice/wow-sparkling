@@ -15,11 +15,16 @@ function App() {
             <Header />
             <Switch location={location} key={location.key}>
                 <AnimatePresence exitBeforeEnter>
-                    <Route path="/" component={Home} />
-                    <Route path="/shop/:flavor">
-                        {paramaters => <BuyPage flavor={paramaters.flavor} />}
-                    </Route>
-                    <Route>`404, Sorry the page does not exist!`</Route>
+                    <Switch>
+                        <Route path="/" component={Home} />
+                        <Route path="/shop/blackberry" component={Home} />
+                        <Route path="/shop/:flavor">
+                            {paramaters => (
+                                <BuyPage flavor={paramaters.flavor} />
+                            )}
+                        </Route>
+                        <Route>`404, Sorry the page does not exist!`</Route>
+                    </Switch>
                 </AnimatePresence>
             </Switch>
         </>
