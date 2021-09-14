@@ -4,7 +4,6 @@ import React from "react";
 import { Link } from "wouter";
 
 import Background from "../layout/Background";
-import Header from "../layout/Header";
 import NewCanvas from "../layout/NewCanvas";
 
 export default function Home() {
@@ -24,7 +23,6 @@ export default function Home() {
                     backgroundColor: "#eeeeee",
                 }}
             >
-                <Header />
                 <Background />
                 <div style={{ display: "flex", zIndex: 2 }}>
                     <div

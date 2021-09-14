@@ -1,12 +1,13 @@
 import { Box } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 
 import activeObjects from "../stores/activeObjects";
 import MenuCanvas from "./MenuCanvas";
 
-export default function Menu({ showSelf }) {
+export default function Menu({ showSelf, setShowSelf }) {
+    const [, setLocation] = useLocation();
     const MotionBox = motion(Box);
     const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
     const dispatchShowBlackberry = activeObjects(
@@ -80,42 +81,66 @@ export default function Menu({ showSelf }) {
                             initial="hidden"
                             animate="show"
                         >
-                            <Link to="/shop/blackberry">
-                                <motion.a
-                                    onMouseEnter={dispatchShowBlackberry}
-                                    onMouseLeave={dispatchShowBlackberry}
-                                    variants={item}
-                                >
-                                    Blackberry | Lemon | Lavender
-                                </motion.a>
-                            </Link>
-                            <Link to="/shop/cucumber">
-                                <motion.a
-                                    onMouseEnter={dispatchShowCucumber}
-                                    onMouseLeave={dispatchShowCucumber}
-                                    variants={item}
-                                >
-                                    Cucumber | Lime | Basil
-                                </motion.a>
-                            </Link>
-                            <Link to="/shop/grapefruit">
-                                <motion.a
-                                    onMouseEnter={dispatchShowGrapefruit}
-                                    onMouseLeave={dispatchShowGrapefruit}
-                                    variants={item}
-                                >
-                                    Grapefruit | Elderflower | Rosemary
-                                </motion.a>
-                            </Link>
-                            <Link to="/shop/pineapple">
-                                <motion.a
-                                    onMouseEnter={dispatchShowPineapple}
-                                    onMouseLeave={dispatchShowPineapple}
-                                    variants={item}
-                                >
-                                    Pineapple | Ginger | Hibiscus
-                                </motion.a>
-                            </Link>
+                            <motion.p
+                                style={{
+                                    cursor: "pointer",
+                                }}
+                                tabIndex={0}
+                                onMouseEnter={dispatchShowBlackberry}
+                                onMouseLeave={dispatchShowBlackberry}
+                                variants={item}
+                                onClick={() => {
+                                    setShowSelf(false);
+                                    setLocation("/shop/blackberry");
+                                }}
+                            >
+                                Blackberry | Lemon | Lavender
+                            </motion.p>
+                            <motion.p
+                                style={{
+                                    cursor: "pointer",
+                                }}
+                                tabIndex={0}
+                                onMouseEnter={dispatchShowCucumber}
+                                onMouseLeave={dispatchShowCucumber}
+                                variants={item}
+                                onClick={() => {
+                                    setShowSelf(false);
+                                    setLocation("/shop/cucumber");
+                                }}
+                            >
+                                Cucumber | Lime | Basil
+                            </motion.p>
+                            <motion.p
+                                style={{
+                                    cursor: "pointer",
+                                }}
+                                tabIndex={0}
+                                onMouseEnter={dispatchShowGrapefruit}
+                                onMouseLeave={dispatchShowGrapefruit}
+                                variants={item}
+                                onClick={() => {
+                                    setShowSelf(false);
+                                    setLocation("/shop/grapefruit");
+                                }}
+                            >
+                                Grapefruit | Elderflower | Rosemary
+                            </motion.p>
+                            <motion.p
+                                style={{
+                                    cursor: "pointer",
+                                }}
+                                tabIndex={0}
+                                onMouseEnter={dispatchShowPineapple}
+                                onMouseLeave={dispatchShowPineapple}
+                                variants={item}
+                                onClick={() => {
+                                    setShowSelf(false);
+                                    setLocation("/shop/pineapple");
+                                }}
+                            >
+                                Pineapple | Ginger | Hibiscus
+                            </motion.p>
                         </motion.div>
                     </div>
                     <MenuCanvas />
