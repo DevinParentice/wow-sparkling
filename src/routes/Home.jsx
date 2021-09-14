@@ -33,7 +33,13 @@ export default function Home() {
                             flexWrap: "wrap",
                         }}
                     >
-                        <div style={{ zIndex: 2, marginLeft: "5rem" }}>
+                        <div
+                            style={{
+                                zIndex: 2,
+                                marginLeft: "5rem",
+                                userSelect: "none",
+                            }}
+                        >
                             <MotionText
                                 as="h1"
                                 fontSize="6rem"
@@ -50,9 +56,13 @@ export default function Home() {
                             </MotionText>
                             <MotionText
                                 as="h2"
-                                fontSize="1.625rem"
+                                fontSize="2rem"
+                                fontFamily="'Sharp Grotesk Book'"
                                 color="whitesmoke"
-                                style={{ marginBottom: "3rem" }}
+                                style={{
+                                    marginBottom: "3rem",
+                                    marginRight: "8rem",
+                                }}
                                 initial={{ opacity: 0, x: -200 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.75, ...fadeIn }}

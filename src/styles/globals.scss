@@ -1,0 +1,40 @@
+@use "abstracts/mixins";
+@use "abstracts/variables";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+*::-webkit-scrollbar {
+	width: 0 !important;
+}
+
+* {
+	font-family: variables.$font-main;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow: -moz-scrollbars-none;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	width: 100%;
+}
+
+@include mixins.font-face(
+	"Sharp Grotesk Regular",
+    "/fonts/SharpGroteskRegular",
+    normal,
+    normal
+);
+
+@include mixins.font-face(
+	"Sharp Grotesk Book",
+    "/fonts/SharpGroteskBook",
+    normal,
+    normal
+);

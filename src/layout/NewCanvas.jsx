@@ -29,7 +29,7 @@ export default function NewCanvas() {
                         anchorY="center"
                         position={[0, -2.75, 0]}
                         fontSize={0.25}
-                        font="/fonts/SharpGrotesk.ttf"
+                        font="/fonts/SharpGroteskBook.woff"
                     >
                         Drag to explore
                     </Text>
