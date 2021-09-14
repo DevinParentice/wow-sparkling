@@ -28,8 +28,11 @@ export default {
         // {"match": "routes", "src": ".*", "dest": "/index.html"},
     ],
     optimize: {
-        /* Example: Bundle your final build: */
-        // "bundle": true,
+        // bundle: true,
+        // minify: true,
+        // splitting: true,
+        // treeshake: true,
+        // target: "es2018",
     },
     packageOptions: {
         /* ... */

@@ -21,6 +21,26 @@ export default function Menu({ showSelf }) {
     const dispatchShowPineapple = activeObjects(
         state => state.dispatchShowPineapple
     );
+    const variants = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                delayChildren: 0.4,
+                staggerChildren: 0.2,
+            },
+        },
+    };
+    const item = {
+        hidden: { opacity: 0, x: -50 },
+        show: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 0.8,
+            },
+        },
+    };
     return (
         <AnimatePresence>
             {showSelf && (
@@ -47,7 +67,7 @@ export default function Menu({ showSelf }) {
                             paddingLeft: "4rem",
                         }}
                     >
-                        <div
+                        <motion.div
                             style={{
                                 height: "60vh",
                                 display: "flex",
@@ -56,40 +76,47 @@ export default function Menu({ showSelf }) {
                                 alignItems: "flex-start",
                                 fontSize: "2.5rem",
                             }}
+                            variants={variants}
+                            initial="hidden"
+                            animate="show"
                         >
                             <Link to="/shop/blackberry">
-                                <a
+                                <motion.a
                                     onMouseEnter={dispatchShowBlackberry}
                                     onMouseLeave={dispatchShowBlackberry}
+                                    variants={item}
                                 >
                                     Blackberry | Lemon | Lavender
-                                </a>
+                                </motion.a>
                             </Link>
                             <Link to="/shop/cucumber">
-                                <a
+                                <motion.a
                                     onMouseEnter={dispatchShowCucumber}
                                     onMouseLeave={dispatchShowCucumber}
+                                    variants={item}
                                 >
                                     Cucumber | Lime | Basil
-                                </a>
+                                </motion.a>
                             </Link>
                             <Link to="/shop/grapefruit">
-                                <a
+                                <motion.a
                                     onMouseEnter={dispatchShowGrapefruit}
                                     onMouseLeave={dispatchShowGrapefruit}
+                                    variants={item}
                                 >
                                     Grapefruit | Elderflower | Rosemary
-                                </a>
+                                </motion.a>
                             </Link>
                             <Link to="/shop/pineapple">
-                                <a
+                                <motion.a
                                     onMouseEnter={dispatchShowPineapple}
                                     onMouseLeave={dispatchShowPineapple}
+                                    variants={item}
                                 >
                                     Pineapple | Ginger | Hibiscus
-                                </a>
+                                </motion.a>
                             </Link>
-                        </div>
+                        </motion.div>
                     </div>
                     <MenuCanvas />
                 </MotionBox>

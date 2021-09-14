@@ -57,7 +57,7 @@ export default function Header() {
                 showCart={setShowCart}
                 iconColor={showCart ? "#1A202C" : "white"}
             />
-            <Cart showSelf={showCart} />
+            <Cart showSelf={showCart} setShowSelf={setShowCart} />
             <Menu showSelf={showMenu} />
         </motion.div>
     );

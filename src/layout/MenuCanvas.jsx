@@ -1,5 +1,5 @@
 import { animated, useSpring } from "@react-spring/three";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense } from "react";
 
@@ -42,7 +42,6 @@ export default function MenuCanvas() {
                 <AnimatedPineappleCan position={properties.pineapplePosition} />
                 <Environment preset="city" />
             </Suspense>
-            <OrbitControls />
         </Canvas>
     );
 }

@@ -47,6 +47,7 @@ export default function Home() {
                                 initial={{ opacity: 0, x: -200 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5, ...fadeIn }}
+                                marginRight="6rem"
                             >
                                 Add a little&nbsp;
                                 <em>

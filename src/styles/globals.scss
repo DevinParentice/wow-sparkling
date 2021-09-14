@@ -3,19 +3,17 @@
 
 * {
 	box-sizing: border-box;
+	font-family: variables.$font-main;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	margin: 0;
+	-ms-overflow-style: none;
 	padding: 0;
+	scrollbar-width: none;
 }
 
 *::-webkit-scrollbar {
 	width: 0 !important;
-}
-
-* {
-	font-family: variables.$font-main;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow: -moz-scrollbars-none;
 }
 
 html,
