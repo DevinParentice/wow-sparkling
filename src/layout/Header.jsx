@@ -35,7 +35,7 @@ export default function Header() {
                 <Hamburger
                     toggled={showMenu}
                     toggle={setShowMenu}
-                    color={showMenu ? "black" : "white"}
+                    color={showMenu ? "#1A202C" : "white"}
                     size={42}
                     rounded
                     label="Show Menu"
@@ -55,7 +55,7 @@ export default function Header() {
             <CartIcon
                 cartState={showCart}
                 showCart={setShowCart}
-                iconColor={showCart ? "black" : "white"}
+                iconColor={showCart ? "#1A202C" : "white"}
             />
             <Cart showSelf={showCart} />
             <Menu showSelf={showMenu} />
