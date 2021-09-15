@@ -32,6 +32,7 @@ export default function MenuCanvas() {
         <Canvas style={{ width: "40vw", height: "100vh" }}>
             <Suspense fallback={null}>
                 <ambientLight intensity={0.3} />
+                <Environment preset="city" />
                 <AnimatedBlackberryCan
                     position={properties.blackberryPosition}
                 />
@@ -40,7 +41,6 @@ export default function MenuCanvas() {
                     position={properties.grapefruitPosition}
                 />
                 <AnimatedPineappleCan position={properties.pineapplePosition} />
-                <Environment preset="city" />
             </Suspense>
         </Canvas>
     );

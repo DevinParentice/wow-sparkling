@@ -1,3 +1,4 @@
+import { animated, useSpring } from "@react-spring/three";
 import {
     Billboard,
     ContactShadows,
@@ -6,12 +7,21 @@ import {
     Text,
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
-import PineappleCan from "../components/PineappleCan";
+import MainCan from "../components/MainCan";
 
 export default function NewCanvas() {
+    const [isLoaded, setIsLoaded] = useState(false);
     const controls = useRef();
+    const AnimatedCan = animated(MainCan);
+    const properties = useSpring({
+        position: isLoaded ? [0, 0, 0] : [20, 0, 0],
+    });
+
+    useEffect(() => {
+        setTimeout(() => setIsLoaded(true), 1500);
+    }, []);
     return (
         <Canvas
             shadows
@@ -21,7 +31,10 @@ export default function NewCanvas() {
         >
             <ambientLight intensity={0.5} />
             <Suspense fallback={null}>
-                <PineappleCan />
+                <AnimatedCan
+                    position={properties.position}
+                    onClick={() => setIsLoaded(!isLoaded)}
+                />
                 <Billboard>
                     <Text
                         color="whitesmoke"
@@ -51,6 +64,7 @@ export default function NewCanvas() {
                 enableZoom={false}
                 enablePan={false}
                 maxPolarAngle={Math.PI / 2}
+                autoRotate
             />
         </Canvas>
     );
