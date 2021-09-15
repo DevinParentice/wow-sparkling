@@ -15,8 +15,10 @@ export default function NewCanvas() {
     const [isLoaded, setIsLoaded] = useState(false);
     const controls = useRef();
     const AnimatedCan = animated(MainCan);
+    const AnimatedMaterial = animated("meshBasicMaterial");
     const properties = useSpring({
         position: isLoaded ? [0, 0, 0] : [20, 0, 0],
+        opacity: isLoaded ? 1 : 0,
     });
 
     useEffect(() => {
@@ -47,6 +49,11 @@ export default function NewCanvas() {
                         font="/fonts/SharpGroteskBook.woff"
                     >
                         Drag to explore
+                        <AnimatedMaterial
+                            transparent
+                            opacity={properties.opacity}
+                            color="whitesmoke"
+                        />
                     </Text>
                 </Billboard>
 
