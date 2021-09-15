@@ -1,10 +1,12 @@
+import "./Home.scss";
+
 import { Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "wouter";
 
-import Background from "../layout/Background";
-import NewCanvas from "../layout/NewCanvas";
+import Background from "../../components/Background";
+import NewCanvas from "../../layout/NewCanvas";
 
 export default function Home() {
     const MotionText = motion(Text);
@@ -52,6 +54,7 @@ export default function Home() {
                                 initial={{ opacity: 0, x: -200 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5, ...fadeIn }}
+                                className="text-shadow"
                             >
                                 Add a little{" "}
                                 <span>
@@ -75,28 +78,42 @@ export default function Home() {
                                 initial={{ opacity: 0, x: -200 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.75, ...fadeIn }}
+                                className="text-shadow-body"
                             >
                                 All natural alcohol-free beverages to empower
                                 your choice to drink
                             </MotionText>
-                            <Link to="/shop">
-                                <motion.a
-                                    style={{
-                                        backgroundColor: "whitesmoke",
-                                        padding: "1.875rem 4rem",
-                                        borderRadius: "0.375rem",
-                                        fontSize: "1.25rem",
-                                        boxShadow:
-                                            "0px 0px 10px rgba(0, 0, 0, 0.1)",
-                                    }}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <Link to="/shop">
+                                    <motion.a
+                                        style={{
+                                            backgroundColor: "whitesmoke",
+                                            padding: "1.875rem 4rem",
+                                            borderRadius: "0.375rem",
+                                            fontSize: "1.25rem",
+                                            boxShadow:
+                                                "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                                        }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 1, ...fadeIn }}
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        Shop Now
+                                    </motion.a>
+                                </Link>
+                                <motion.div
+                                    className="icon-scroll"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ delay: 1, ...fadeIn }}
-                                    whileHover={{ scale: 1.05 }}
-                                >
-                                    Shop Now
-                                </motion.a>
-                            </Link>
+                                    transition={{ delay: 3.5, ...fadeIn }}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div style={{ maxWidth: "50vw", overflow: "hidden" }}>

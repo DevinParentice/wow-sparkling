@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useLocation } from "wouter";
 
-import activeObjects from "../stores/activeObjects";
-import MenuCanvas from "./MenuCanvas";
+import activeObjects from "../../stores/activeObjects";
+import MenuCanvas from "../MenuCanvas";
 
 export default function Menu({ showSelf, setShowSelf }) {
     const [, setLocation] = useLocation();

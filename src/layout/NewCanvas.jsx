@@ -27,14 +27,16 @@ export default function NewCanvas() {
             shadows
             dpr={[1, 2]}
             gl={{ alpha: true, stencil: false, antialias: true }}
-            style={{ width: "50vw", height: "100vh", overflowX: "hidden" }}
+            style={{
+                width: "50vw",
+                height: "100vh",
+                overflowX: "hidden",
+                cursor: "grab",
+            }}
         >
             <ambientLight intensity={0.5} />
             <Suspense fallback={null}>
-                <AnimatedCan
-                    position={properties.position}
-                    onClick={() => setIsLoaded(!isLoaded)}
-                />
+                <AnimatedCan position={properties.position} />
                 <Billboard>
                     <Text
                         color="whitesmoke"

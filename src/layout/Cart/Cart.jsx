@@ -2,7 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
-import FrownIcon from "../assets/icons/FrownIcon";
+import FrownIcon from "../../assets/icons/FrownIcon";
 
 export default function Cart({ showSelf, setShowSelf }) {
     const AnimatedBox = motion(Box);

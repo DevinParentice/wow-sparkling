@@ -3,11 +3,11 @@ import { Squash as Hamburger } from "hamburger-react";
 import React, { useState } from "react";
 import { Link } from "wouter";
 
-import CartIcon from "../assets/icons/CartIcon";
-import BlackLogo from "../assets/images/wow-logo-black.png";
-import WhiteLogo from "../assets/images/wow-logo-white.png";
-import Cart from "./Cart";
-import Menu from "./Menu";
+import CartIcon from "../../assets/icons/CartIcon";
+import BlackLogo from "../../assets/images/wow-logo-black.png";
+import WhiteLogo from "../../assets/images/wow-logo-white.png";
+import Cart from "../Cart";
+import Menu from "../Menu";
 
 export default function Header() {
     const [showCart, setShowCart] = useState(false);
@@ -55,7 +55,7 @@ export default function Header() {
             <CartIcon
                 cartState={showCart}
                 showCart={setShowCart}
-                iconColor={showCart ? "#1A202C" : "white"}
+                iconColor={showCart ? "#1A202C" : "#fff"}
             />
             <Cart showSelf={showCart} setShowSelf={setShowCart} />
             <Menu showSelf={showMenu} setShowSelf={setShowMenu} />

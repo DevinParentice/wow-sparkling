@@ -10,7 +10,7 @@ export default function Model(properties) {
         const t = state.clock.getElapsedTime();
         group.current.rotation.x = THREE.MathUtils.lerp(
             group.current.rotation.x,
-            Math.cos(t / 2) / 10 + 0.25,
+            Math.cos(t / 2) / 10 + -0.25,
             0.1
         );
         group.current.rotation.y = THREE.MathUtils.lerp(
@@ -30,7 +30,7 @@ export default function Model(properties) {
         );
     });
     return (
-        <group ref={group} {...properties} dispose={null}>
+        <group ref={group} {...properties} dispose={null} scale={1.2}>
             <group
                 position={[0, -1, 0]}
                 rotation={[-Math.PI, 0.627_81, -Math.PI]}

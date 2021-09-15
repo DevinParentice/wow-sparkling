@@ -4,15 +4,15 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { Route, Switch, useLocation } from "wouter";
 
-import Header from "./layout/Header";
-import BuyPage from "./routes/BuyPage";
-import Catalog from "./routes/Catalog";
-import Home from "./routes/Home";
+import Header from "./layout/Navigation/Header";
+import BuyPage from "./routes/BuyPage/BuyPage";
+import Catalog from "./routes/Catalog/Catalog";
+import Home from "./routes/Home/Home";
 
 function App() {
     const [location] = useLocation();
     return (
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter initial>
             <>
                 <Header />
                 <Switch location={location} key={location.key}>
