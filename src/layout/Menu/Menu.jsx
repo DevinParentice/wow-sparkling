@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useLocation } from "wouter";
 
+import SocialMedia from "../../components/SocialMedia";
 import activeObjects from "../../stores/activeObjects";
 import MenuCanvas from "../MenuCanvas";
 
@@ -144,6 +145,7 @@ export default function Menu({ showSelf, setShowSelf }) {
                         </motion.div>
                     </div>
                     <MenuCanvas />
+                    <SocialMedia />
                 </MotionBox>
             )}
         </AnimatePresence>

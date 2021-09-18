@@ -57,6 +57,31 @@ export default function Header() {
                 showCart={setShowCart}
                 iconColor={showCart ? "#1A202C" : "#fff"}
             />
+            {showMenu && (
+                <motion.div
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        zIndex: 6,
+                        height: "7rem",
+                        alignItems: "center",
+                        width: "33%",
+                        fontSize: "1.5rem",
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: fadeIn }}
+                >
+                    <Link to="/story">
+                        <a>Our Story</a>
+                    </Link>
+                    <Link to="/contact">
+                        <a>Contact Us</a>
+                    </Link>
+                </motion.div>
+            )}
             <Cart showSelf={showCart} setShowSelf={setShowCart} />
             <Menu showSelf={showMenu} setShowSelf={setShowMenu} />
         </motion.div>
