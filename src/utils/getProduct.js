@@ -3,7 +3,8 @@ export const getProduct = flavor => {
     switch (flavor) {
         case "blackberry":
             productInfo = {
-                name: "Blackberry | Lemon | Lavender",
+                key: "blackberry",
+                name: "Blackberry Lemon Lavender",
                 headline: "Enticing & Vibrant",
                 description:
                     "A layering of tangy blackberry and bright lemon with hints of delicate lavender and earthy rooibos tea lightly sweetened with agave.",
@@ -12,7 +13,8 @@ export const getProduct = flavor => {
             break;
         case "cucumber":
             productInfo = {
-                name: "Cucumber | Lime | Basil",
+                key: "cucumber",
+                name: "Cucumber Lime Basil",
                 headline: "Calming & Fresh",
                 description:
                     "A layering of cool cucumber and tart lime with a hint of aromatic basil and green tea lightly sweetened with agave.",
@@ -21,7 +23,8 @@ export const getProduct = flavor => {
             break;
         case "grapefruit":
             productInfo = {
-                name: "Grapefruit | Elderflower | Rosemary",
+                key: "grapefruit",
+                name: "Grapefruit Elderflower Rosemary",
                 headline: "Refreshing & Crisp",
                 description:
                     "A layering of zesty red grapefruit and floral elderflower with a touch of aromatic rosemary, green tea and juniper berry lightly sweetened with agave.",
@@ -30,7 +33,8 @@ export const getProduct = flavor => {
             break;
         case "pineapple":
             productInfo = {
-                name: "Pineapple | Ginger | Lemon",
+                key: "pineapple",
+                name: "Pineapple Ginger Lemon",
                 headline: "Intriguing & Exotic",
                 description:
                     "A layering of tropical pineapple and spicy ginger with lemon and a hint of tart hibiscus tea lightly sweetened with agave.",

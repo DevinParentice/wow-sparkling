@@ -1,8 +1,39 @@
-#gradient-canvas {
+#gradient-canvas-main {
 	--gradient-color-1: #dd9b9b;
 	--gradient-color-2: #f0cc79;
 	--gradient-color-3: #c3a5d1;
 	--gradient-color-4: #96b694;
+}
+
+#gradient-canvas-blackberry {
+	--gradient-color-1: #9f75b3;
+	--gradient-color-2: #804e98;
+	--gradient-color-3: #6b40a5;
+	--gradient-color-4: #4d275f;
+}
+
+#gradient-canvas-cucumber {
+	--gradient-color-1: #96b694;
+	--gradient-color-2: #79a277;
+	--gradient-color-3: #354c34;
+	--gradient-color-4: #849c84;
+}
+
+#gradient-canvas-grapefruit {
+	--gradient-color-1: #dd9b9b;
+	--gradient-color-2: #ecc6c6;
+	--gradient-color-3: #d27a7a;
+	--gradient-color-4: #852d2d;
+}
+
+#gradient-canvas-pineapple {
+	--gradient-color-1: #f0cc79;
+	--gradient-color-2: #e8b031;
+	--gradient-color-3: #edc25e;
+	--gradient-color-4: #a17512;
+}
+
+.background-canvas {
 	height: 100%;
 	position: absolute;
 	width: 100%;

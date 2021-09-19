@@ -92,6 +92,7 @@ export default function Menu({ showSelf, setShowSelf }) {
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
+                                    dispatchShowBlackberry();
                                     setLocation("/shop/blackberry");
                                 }}
                             >
@@ -107,6 +108,7 @@ export default function Menu({ showSelf, setShowSelf }) {
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
+                                    dispatchShowCucumber();
                                     setLocation("/shop/cucumber");
                                 }}
                             >
@@ -122,6 +124,7 @@ export default function Menu({ showSelf, setShowSelf }) {
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
+                                    dispatchShowGrapefruit();
                                     setLocation("/shop/grapefruit");
                                 }}
                             >
@@ -137,6 +140,7 @@ export default function Menu({ showSelf, setShowSelf }) {
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
+                                    dispatchShowPineapple();
                                     setLocation("/shop/pineapple");
                                 }}
                             >

@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import "../styles/App.css";
 
 /*
@@ -687,14 +688,7 @@ class Gradient {
                     this.isMouseDown) &&
                     requestAnimationFrame(this.animate);
             }),
-            e(this, "addIsLoadedClass", () => {
-                /*this.isIntersecting && */ !this.isLoadedClass &&
-                    ((this.isLoadedClass = !0),
-                    this.el.classList.add("isLoaded"),
-                    setTimeout(() => {
-                        this.el.parentElement.classList.add("isLoaded");
-                    }, 3e3));
-            }),
+            e(this, "addIsLoadedClass", () => {}),
             e(this, "pause", () => {
                 this.conf.playing = false;
             }),
@@ -975,15 +969,15 @@ class Gradient {
  * Gradient.updateFrequency(freq)
  */
 
-export default function Background() {
+export default function Background({ canvasID }) {
     useEffect(() => {
         const gradient = new Gradient();
-        gradient.initGradient("#gradient-canvas");
+        gradient.initGradient(`#${canvasID}`);
     }, []);
-
     return (
         <canvas
-            id="gradient-canvas"
+            id={canvasID}
+            className="background-canvas"
             data-js-darken-top
             data-transition-in
         ></canvas>

@@ -25,7 +25,7 @@ export default function Home() {
                     backgroundColor: "#eeeeee",
                 }}
             >
-                <Background />
+                <Background canvasID="gradient-canvas-main" />
                 <div style={{ display: "flex", zIndex: 2 }}>
                     <div
                         style={{
