@@ -34,7 +34,7 @@ export const getProduct = flavor => {
         case "pineapple":
             productInfo = {
                 key: "pineapple",
-                name: "Pineapple Ginger Lemon",
+                name: "Pineapple Ginger Hibiscus",
                 headline: "Intriguing & Exotic",
                 description:
                     "A layering of tropical pineapple and spicy ginger with lemon and a hint of tart hibiscus tea lightly sweetened with agave.",

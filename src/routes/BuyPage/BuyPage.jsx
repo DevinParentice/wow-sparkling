@@ -71,6 +71,19 @@ export default function BuyPage({ flavor }) {
                         </motion.h1>
                         <motion.h2
                             style={{
+                                fontFamily: "Sharp Grotesk Regular",
+                                fontSize: "2.5rem",
+                            }}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ delay: 1.25, ...fadeIn }}
+                            className="text-shadow"
+                        >
+                            {product.headline}
+                        </motion.h2>
+                        <motion.h3
+                            style={{
                                 marginTop: "1rem",
                                 fontFamily: "Sharp Grotesk Book",
                                 fontSize: "1.5rem",
@@ -82,7 +95,7 @@ export default function BuyPage({ flavor }) {
                             className="text-shadow-body"
                         >
                             {product.description}
-                        </motion.h2>
+                        </motion.h3>
                     </Box>
                 </div>
                 <CanDisplay product={product.key} />

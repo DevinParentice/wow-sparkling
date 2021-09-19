@@ -3,6 +3,7 @@ import {
     Billboard,
     ContactShadows,
     Environment,
+    Loader,
     OrbitControls,
     Text,
 } from "@react-three/drei";
@@ -25,56 +26,59 @@ export default function NewCanvas() {
         setTimeout(() => setIsLoaded(true), 1500);
     }, []);
     return (
-        <Canvas
-            shadows
-            dpr={[1, 2]}
-            gl={{ alpha: true, stencil: false, antialias: true }}
-            style={{
-                width: "50vw",
-                height: "100vh",
-                overflowX: "hidden",
-                cursor: "grab",
-            }}
-        >
-            <ambientLight intensity={0.5} />
-            <Suspense fallback={null}>
-                <AnimatedCan position={properties.position} />
-                <Billboard>
-                    <Text
-                        color="whitesmoke"
-                        anchorX="center"
-                        anchorY="center"
-                        position={[0, -2.75, 0]}
-                        fontSize={0.25}
-                        font="/fonts/SharpGroteskBook.woff"
-                    >
-                        Drag to explore
-                        <AnimatedMaterial
-                            transparent
-                            opacity={properties.opacity}
+        <>
+            <Canvas
+                shadows
+                dpr={[1, 2]}
+                gl={{ alpha: true, stencil: false, antialias: true }}
+                style={{
+                    width: "50vw",
+                    height: "100vh",
+                    overflowX: "hidden",
+                    cursor: "grab",
+                }}
+            >
+                <ambientLight intensity={0.5} />
+                <Suspense fallback={null}>
+                    <AnimatedCan position={properties.position} />
+                    <Billboard>
+                        <Text
                             color="whitesmoke"
-                        />
-                    </Text>
-                </Billboard>
+                            anchorX="center"
+                            anchorY="center"
+                            position={[0, -2.75, 0]}
+                            fontSize={0.25}
+                            font="/fonts/SharpGroteskBook.woff"
+                        >
+                            Drag to explore
+                            <AnimatedMaterial
+                                transparent
+                                opacity={properties.opacity}
+                                color="whitesmoke"
+                            />
+                        </Text>
+                    </Billboard>
 
-                <Environment preset="city" />
-                <ContactShadows
-                    rotation-x={Math.PI / 2}
-                    position={[0, -5, 0]}
-                    opacity={0.25}
-                    width={100}
-                    height={100}
-                    blur={1.5}
-                    far={0.8}
+                    <Environment preset="city" />
+                    <ContactShadows
+                        rotation-x={Math.PI / 2}
+                        position={[0, -5, 0]}
+                        opacity={0.25}
+                        width={100}
+                        height={100}
+                        blur={1.5}
+                        far={0.8}
+                    />
+                </Suspense>
+                <OrbitControls
+                    ref={controls}
+                    enableZoom={false}
+                    enablePan={false}
+                    maxPolarAngle={Math.PI / 2}
+                    autoRotate
                 />
-            </Suspense>
-            <OrbitControls
-                ref={controls}
-                enableZoom={false}
-                enablePan={false}
-                maxPolarAngle={Math.PI / 2}
-                autoRotate
-            />
-        </Canvas>
+            </Canvas>
+            <Loader />
+        </>
     );
 }

@@ -32,7 +32,7 @@ export default function MenuCanvas() {
         <Canvas style={{ width: "40vw", height: "100vh" }}>
             <Suspense fallback={null}>
                 <ambientLight intensity={0.3} />
-                <Environment preset="city" />
+                <Environment preset="city" position={[0, 0, 0]} />
                 <AnimatedBlackberryCan
                     position={properties.blackberryPosition}
                 />

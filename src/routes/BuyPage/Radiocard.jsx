@@ -1,8 +1,9 @@
 import { Box, useRadio } from "@chakra-ui/react";
 import React from "react";
 
-export default function RadioCard({ ...properties }) {
+export default function RadioCard(properties) {
     const { getInputProps, getCheckboxProps } = useRadio(properties);
+    const { children } = properties;
 
     const input = getInputProps();
     const checkbox = getCheckboxProps();
@@ -18,6 +19,7 @@ export default function RadioCard({ ...properties }) {
                 borderRadius="md"
                 boxShadow="md"
                 color="gray.800"
+                tabIndex="0"
                 _hover={{
                     scale: 1.05,
                 }}
@@ -31,7 +33,7 @@ export default function RadioCard({ ...properties }) {
                 px={5}
                 py={3}
             >
-                {properties}
+                {children}
             </Box>
         </Box>
     );
