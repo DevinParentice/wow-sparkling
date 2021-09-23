@@ -5,14 +5,10 @@ export const activeObjects = create(set => ({
     showCucumber: false,
     showGrapefruit: false,
     showPineapple: false,
-    dispatchShowBlackberry: () =>
-        set(state => ({ showBlackberry: !state.showBlackberry })),
-    dispatchShowCucumber: () =>
-        set(state => ({ showCucumber: !state.showCucumber })),
-    dispatchShowGrapefruit: () =>
-        set(state => ({ showGrapefruit: !state.showGrapefruit })),
-    dispatchShowPineapple: () =>
-        set(state => ({ showPineapple: !state.showPineapple })),
+    dispatchShowBlackberry: status => set(() => ({ showBlackberry: status })),
+    dispatchShowCucumber: status => set(() => ({ showCucumber: status })),
+    dispatchShowGrapefruit: status => set(() => ({ showGrapefruit: status })),
+    dispatchShowPineapple: status => set(() => ({ showPineapple: status })),
 }));
 
 export default activeObjects;

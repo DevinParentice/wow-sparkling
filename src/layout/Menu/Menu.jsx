@@ -87,12 +87,16 @@ export default function Menu({ showSelf, setShowSelf }) {
                                     cursor: "pointer",
                                 }}
                                 tabIndex={0}
-                                onMouseEnter={dispatchShowBlackberry}
-                                onMouseLeave={dispatchShowBlackberry}
+                                onMouseEnter={() => {
+                                    dispatchShowBlackberry(true);
+                                    dispatchShowCucumber(false);
+                                    dispatchShowGrapefruit(false);
+                                    dispatchShowPineapple(false);
+                                }}
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
-                                    dispatchShowBlackberry();
+                                    dispatchShowBlackberry(false);
                                     setLocation("/shop/blackberry");
                                 }}
                             >
@@ -103,12 +107,16 @@ export default function Menu({ showSelf, setShowSelf }) {
                                     cursor: "pointer",
                                 }}
                                 tabIndex={0}
-                                onMouseEnter={dispatchShowCucumber}
-                                onMouseLeave={dispatchShowCucumber}
+                                onMouseEnter={() => {
+                                    dispatchShowBlackberry(false);
+                                    dispatchShowCucumber(true);
+                                    dispatchShowGrapefruit(false);
+                                    dispatchShowPineapple(false);
+                                }}
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
-                                    dispatchShowCucumber();
+                                    dispatchShowCucumber(false);
                                     setLocation("/shop/cucumber");
                                 }}
                             >
@@ -119,12 +127,16 @@ export default function Menu({ showSelf, setShowSelf }) {
                                     cursor: "pointer",
                                 }}
                                 tabIndex={0}
-                                onMouseEnter={dispatchShowGrapefruit}
-                                onMouseLeave={dispatchShowGrapefruit}
+                                onMouseEnter={() => {
+                                    dispatchShowBlackberry(false);
+                                    dispatchShowCucumber(false);
+                                    dispatchShowGrapefruit(true);
+                                    dispatchShowPineapple(false);
+                                }}
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
-                                    dispatchShowGrapefruit();
+                                    dispatchShowGrapefruit(false);
                                     setLocation("/shop/grapefruit");
                                 }}
                             >
@@ -135,12 +147,16 @@ export default function Menu({ showSelf, setShowSelf }) {
                                     cursor: "pointer",
                                 }}
                                 tabIndex={0}
-                                onMouseEnter={dispatchShowPineapple}
-                                onMouseLeave={dispatchShowPineapple}
+                                onMouseEnter={() => {
+                                    dispatchShowBlackberry(false);
+                                    dispatchShowCucumber(false);
+                                    dispatchShowGrapefruit(false);
+                                    dispatchShowPineapple(true);
+                                }}
                                 variants={item}
                                 onClick={() => {
                                     setShowSelf(false);
-                                    dispatchShowPineapple();
+                                    dispatchShowPineapple(false);
                                     setLocation("/shop/pineapple");
                                 }}
                             >

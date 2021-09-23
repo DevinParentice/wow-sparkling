@@ -10,6 +10,7 @@ import {
     MenuList,
     useRadioGroup,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 
@@ -20,6 +21,7 @@ export default function Form({ product }) {
     const [quantity, setQuantity] = useState(1);
     const [total, setTotal] = useState(0);
     const options = ["12 Pack", "24 Pack"];
+    const AnimatedBox = motion(Box);
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "packs",
         onChange: choice => {
@@ -45,7 +47,7 @@ export default function Form({ product }) {
                 zIndex: 3,
             }}
         >
-            <Box
+            <AnimatedBox
                 bg="whitesmoke"
                 p="2rem"
                 borderRadius="lg"
@@ -58,6 +60,9 @@ export default function Form({ product }) {
                     alignItems: "center",
                     marginRight: "2rem",
                 }}
+                // initial={{ opacity: 0 }}
+                // animate={{ opacity: 1 }}
+                // transition={{ delay: 1, ...transition }}
             >
                 <Menu placement="bottom">
                     <MenuButton
@@ -134,7 +139,7 @@ export default function Form({ product }) {
                         marginTop: "1rem",
                     }}
                 >
-                    <div
+                    <Box
                         style={{
                             border: "1px solid #1A202C",
                             borderRadius: "0.375rem",
@@ -142,6 +147,7 @@ export default function Form({ product }) {
                             justifyContent: "space-around",
                             maxWidth: "125px",
                         }}
+                        boxShadow="md"
                     >
                         <button
                             type="button"
@@ -201,7 +207,7 @@ export default function Form({ product }) {
                         >
                             <AddIcon />
                         </button>
-                    </div>
+                    </Box>
                     <p style={{ fontSize: "1.5rem" }}>
                         {`$${(
                             total *
@@ -215,11 +221,12 @@ export default function Form({ product }) {
                         variant="outline"
                         colorScheme="whitealpha"
                         size="lg"
+                        boxShadow="lg"
                     >
                         Add to Cart
                     </Button>
                 </div>
-            </Box>
+            </AnimatedBox>
         </div>
     );
 }

@@ -1,7 +1,6 @@
 import { animated, useSpring } from "@react-spring/three";
 import {
     Billboard,
-    ContactShadows,
     Environment,
     Loader,
     OrbitControls,
@@ -60,15 +59,6 @@ export default function NewCanvas() {
                     </Billboard>
 
                     <Environment preset="city" />
-                    <ContactShadows
-                        rotation-x={Math.PI / 2}
-                        position={[0, -5, 0]}
-                        opacity={0.25}
-                        width={100}
-                        height={100}
-                        blur={1.5}
-                        far={0.8}
-                    />
                 </Suspense>
                 <OrbitControls
                     ref={controls}
