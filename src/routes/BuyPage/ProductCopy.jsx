@@ -3,7 +3,13 @@ import { motion } from "framer-motion";
 import React from "react";
 
 export default function ProductCopy({ product, transition }) {
-    const flavorList = product.name.split(" ");
+    const flavorList = product.title.split(" ");
+    const headline = product.tags.map(tag => {
+        if (tag.includes("&")) {
+            return tag;
+        }
+        return null;
+    });
     return (
         <div
             style={{
@@ -54,7 +60,7 @@ export default function ProductCopy({ product, transition }) {
                     transition={{ delay: 1.25, ...transition }}
                     className="text-shadow"
                 >
-                    {product.headline}
+                    {headline}
                 </motion.h2>
                 <motion.h3
                     style={{

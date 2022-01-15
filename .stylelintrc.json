@@ -3,6 +3,7 @@
     "rules": {
         "indentation": "tab",
         "string-quotes": "double",
-        "selector-max-id": 4
+        "selector-max-id": 4,
+        "selector-no-qualifying-type": [true, { "ignore": ["attribute"] }]
     }
 }

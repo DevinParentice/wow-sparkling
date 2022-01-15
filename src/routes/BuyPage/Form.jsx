@@ -27,9 +27,9 @@ export default function Form({ product }) {
         onChange: choice => {
             setTotal(total === 0 ? 1 : total);
             if (choice === "12 Pack") {
-                setPackNumber(34);
+                setPackNumber(product.priceRange.minVariantPrice.amount);
             } else {
-                setPackNumber(49);
+                setPackNumber(product.priceRange.maxVariantPrice.amount);
             }
         },
     });
@@ -74,8 +74,8 @@ export default function Form({ product }) {
                         pb="0.375rem"
                     >
                         {`Flavor: ${
-                            product.key.charAt(0).toUpperCase() +
-                            product.key.slice(1)
+                            product.handle.charAt(0).toUpperCase() +
+                            product.handle.slice(1)
                         }`}
                     </MenuButton>
                     <MenuList>

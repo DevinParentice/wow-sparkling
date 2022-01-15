@@ -17,9 +17,7 @@ function App() {
                 <Header />
                 <Switch location={location} key={location.key}>
                     <Route path="/" component={Home} />
-                    <Route path="/shop/:flavor">
-                        {paramaters => <BuyPage flavor={paramaters.flavor} />}
-                    </Route>
+                    <Route path="/shop/:flavor" component={BuyPage} />
                     <Route path="/shop" component={Catalog} />
                     <Route>404, Sorry the page does not exist!</Route>
                 </Switch>

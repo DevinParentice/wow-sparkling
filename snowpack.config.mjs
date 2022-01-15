@@ -23,6 +23,10 @@ export default {
             },
         ],
     ],
+    env: {
+        API_URL: "https://wow-sparkling.myshopify.com/api/2022-01/graphql.json",
+        ACCESS_TOKEN: "817d4e1a7bb0663e52d7695cab532f96",
+    },
     routes: [{ match: "routes", src: ".*", dest: "/index.html" }],
     optimize: {
         // bundle: true,

@@ -1,38 +1,78 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { useLocation } from "wouter";
 
 import Background from "../../components/Background";
-import getProduct from "../../utils/getProduct";
 import CanDisplay from "./CanDisplay";
 import Form from "./Form";
 import ProductCopy from "./ProductCopy";
 
-export default function BuyPage({ flavor }) {
-    const product = getProduct(flavor);
+export default function BuyPage() {
     const [location, ,] = useLocation();
+    const { isSuccess, data } = useQuery(["data", location], () =>
+        fetch(__SNOWPACK_ENV__.API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Shopify-Storefront-Access-Token":
+                    __SNOWPACK_ENV__.ACCESS_TOKEN,
+            },
+            body: JSON.stringify({
+                query: `
+				query product {
+					products(first:1, query:"tag:${location.split("/")[2]}") {
+					  edges {
+						node {
+						  title
+						  description
+						  tags
+						  handle
+						  priceRange {
+							minVariantPrice {
+							  amount
+							}
+							maxVariantPrice {
+							  amount
+							}
+						  }
+						}
+					  }
+					}
+				  }
+			`,
+            }),
+        })
+            .then(response => response.json())
+            .then(response => response.data)
+    );
     const fadeIn = {
         duration: 0.6,
         ease: [0.43, 0.13, 0.23, 0.96],
     };
+
+    if (!isSuccess) return "Loading...";
+    const product = data.products.edges[0].node;
     return (
-        <main>
-            {location === "/shop/blackberry" && (
-                <Background canvasID="gradient-canvas-blackberry" />
-            )}
-            {location === "/shop/cucumber" && (
-                <Background canvasID="gradient-canvas-cucumber" />
-            )}
-            {location === "/shop/grapefruit" && (
-                <Background canvasID="gradient-canvas-grapefruit" />
-            )}
-            {location === "/shop/pineapple" && (
-                <Background canvasID="gradient-canvas-pineapple" />
-            )}
-            <div style={{ display: "flex", userSelect: "none" }}>
-                <ProductCopy product={product} transition={fadeIn} />
-                <CanDisplay product={product.key} />
-                <Form product={product} transition={fadeIn} />
-            </div>
-        </main>
+        isSuccess && (
+            <main>
+                {location === "/shop/blackberry" && (
+                    <Background canvasID="gradient-canvas-blackberry" />
+                )}
+                {location === "/shop/cucumber" && (
+                    <Background canvasID="gradient-canvas-cucumber" />
+                )}
+                {location === "/shop/grapefruit" && (
+                    <Background canvasID="gradient-canvas-grapefruit" />
+                )}
+                {location === "/shop/pineapple" && (
+                    <Background canvasID="gradient-canvas-pineapple" />
+                )}
+                <div style={{ display: "flex", userSelect: "none" }}>
+                    <ProductCopy product={product} transition={fadeIn} />
+                    <CanDisplay product={product.handle} />
+                    <Form product={product} transition={fadeIn} />
+                </div>
+            </main>
+        )
     );
 }

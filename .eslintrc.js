@@ -7,9 +7,13 @@ module.exports = {
         },
     },
     env: {
-        browser: true,
         node: true,
+        commonjs: true,
+        browser: true,
         es6: true,
+    },
+    globals: {
+        __SNOWPACK_ENV__: true,
     },
     settings: {
         react: {
