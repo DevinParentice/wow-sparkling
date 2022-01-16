@@ -16,10 +16,10 @@ export default function MenuCanvas() {
     const showPineapple = activeObjects(state => state.showPineapple);
 
     const properties = useSpring({
-        blackberryPosition: showBlackberry ? [0, 0, 0] : [10, 0, 0],
-        cucumberPosition: showCucumber ? [0, 0, 0] : [10, 0, 0],
-        grapefruitPosition: showGrapefruit ? [0, 0, 0] : [10, 0, 0],
-        pineapplePosition: showPineapple ? [0, 0, 0] : [10, 0, 0],
+        blackberryPosition: showBlackberry ? [0, 0, 0] : [7, 0, 0],
+        cucumberPosition: showCucumber ? [0, 0, 0] : [7, 0, 0],
+        grapefruitPosition: showGrapefruit ? [0, 0, 0] : [7, 0, 0],
+        pineapplePosition: showPineapple ? [0, 0, 0] : [7, 0, 0],
         blackberryRotation: showBlackberry
             ? [-0.15, Math.PI * 2, 0.25]
             : [0, 0, 0],

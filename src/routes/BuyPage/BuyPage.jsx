@@ -6,6 +6,7 @@ import Background from "../../components/Background";
 import CanDisplay from "./CanDisplay";
 import Form from "./Form";
 import ProductCopy from "./ProductCopy";
+// import styles from "./BuyPage.module.scss";
 
 export default function BuyPage() {
     const [location, ,] = useLocation();
@@ -21,22 +22,42 @@ export default function BuyPage() {
                 query: `
 				query product {
 					products(first:1, query:"tag:${location.split("/")[2]}") {
-					  edges {
-						node {
-						  title
-						  description
-						  tags
-						  handle
-						  priceRange {
-							minVariantPrice {
-							  amount
-							}
-							maxVariantPrice {
-							  amount
+						edges {
+							node {
+							  title
+							  description
+							  tags
+							  handle
+							  variants(first: 2) {
+								edges {
+								  node {
+									title
+									id
+									priceV2 {
+									  amount
+									  currencyCode
+									}
+								  }
+								}
+							  }
+							  priceRange {
+								minVariantPrice {
+								  amount
+								}
+								maxVariantPrice {
+								  amount
+								}
+							  }
+							  images(first: 1) {
+								edges {
+								  node {
+									url
+									altText
+								  }
+								}
+							  }
 							}
 						  }
-						}
-					  }
 					}
 				  }
 			`,
@@ -50,7 +71,7 @@ export default function BuyPage() {
         ease: [0.43, 0.13, 0.23, 0.96],
     };
 
-    if (!isSuccess) return "Loading...";
+    if (!isSuccess) return null;
     const product = data.products.edges[0].node;
     return (
         isSuccess && (

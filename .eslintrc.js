@@ -47,5 +47,6 @@ module.exports = {
         "jsx-a11y/anchor-is-valid": "off",
         "unicorn/no-null": "off",
         "unicorn/no-abusive-eslint-disable": "off",
+        "no-param-reassign": "off",
     },
 };

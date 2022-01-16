@@ -11,14 +11,18 @@ import {
     useRadioGroup,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { useLocation } from "wouter";
 
+import cart from "../../stores/cart";
 import RadioCard from "./Radiocard";
 
 export default function Form({ product }) {
     const [packNumber, setPackNumber] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const [variant, setVariant] = useState("");
+    const [variantID, setVariantID] = useState("");
     const [total, setTotal] = useState(0);
     const options = ["12 Pack", "24 Pack"];
     const AnimatedBox = motion(Box);
@@ -27,14 +31,110 @@ export default function Form({ product }) {
         onChange: choice => {
             setTotal(total === 0 ? 1 : total);
             if (choice === "12 Pack") {
+                setVariant("12 Pack");
                 setPackNumber(product.priceRange.minVariantPrice.amount);
             } else {
+                setVariant("24 Pack");
                 setPackNumber(product.priceRange.maxVariantPrice.amount);
             }
         },
     });
     const group = getRootProps();
     const [, setLocation] = useLocation();
+    const dispatchAddItem = cart(state => state.dispatchAddItem);
+    const dispatchSetCartID = cart(state => state.dispatchSetCartID);
+    const cartID = cart(state => state.cartID);
+    const createShopifyCart = useMutation(
+        () => {
+            return fetch(__SNOWPACK_ENV__.API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Shopify-Storefront-Access-Token":
+                        __SNOWPACK_ENV__.ACCESS_TOKEN,
+                },
+                body: JSON.stringify({
+                    query: `mutation checkoutCreate($input: CheckoutCreateInput = {
+					lineItems: [{quantity: ${quantity}, variantId: "${variantID}"}]
+				  }) {
+					checkoutCreate(input: $input) {
+						checkout {
+							id
+							webUrl
+							lineItems(first: 8) {
+							  edges {
+								node {
+								  id
+								  title
+								  quantity
+								}
+							  }
+							}
+							lineItemsSubtotalPrice {
+							  amount
+							  currencyCode
+							}
+						  }
+						  checkoutUserErrors {
+							code
+							field
+							message
+						  }
+						  queueToken
+						}
+				  }`,
+                }),
+            })
+                .then(response => response.json())
+                .then(response => response.data);
+        },
+        {
+            onSuccess: data => {
+                dispatchSetCartID(data.checkoutCreate.checkout.id);
+            },
+        }
+    );
+    const addItemToShopifyCart = useMutation(() => {
+        return fetch(__SNOWPACK_ENV__.API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Shopify-Storefront-Access-Token":
+                    __SNOWPACK_ENV__.ACCESS_TOKEN,
+            },
+            body: JSON.stringify({
+                query: `mutation checkoutLineItemsAdd($lineItems: [CheckoutLineItemInput!]!, $checkoutId: ID!) {
+						checkoutLineItemsAdd(lineItems: $lineItems, checkoutId: $checkoutId) {
+						  checkout {
+							id
+							webUrl
+						  }
+						  checkoutUserErrors {
+							code
+							field
+							message
+						  }
+						}
+					  }`,
+                variables: {
+                    lineItems: [
+                        {
+                            quantity,
+                            variantId: variantID,
+                        },
+                    ],
+                    checkoutId: cartID,
+                },
+            }),
+        });
+    });
+    useEffect(() => {
+        if (cartID === "") {
+            createShopifyCart.mutate();
+        } else {
+            addItemToShopifyCart.mutate();
+        }
+    }, [variantID]);
     return (
         <div
             style={{
@@ -47,6 +147,7 @@ export default function Form({ product }) {
                 zIndex: 3,
             }}
         >
+            <p style={{ color: "black", fontSize: "2rem" }} />
             <AnimatedBox
                 bg="whitesmoke"
                 p="2rem"
@@ -222,6 +323,24 @@ export default function Form({ product }) {
                         colorScheme="whitealpha"
                         size="lg"
                         boxShadow="lg"
+                        onClick={() => {
+                            dispatchAddItem({
+                                product,
+                                price: packNumber * 1,
+                                total: total * packNumber * quantity * 1,
+                                quantity,
+                                variant,
+                            });
+                            const addedID = product.variants.edges.map(
+                                nestedVariant => {
+                                    if (nestedVariant.node.title === variant) {
+                                        return nestedVariant.node.id;
+                                    }
+                                    return null;
+                                }
+                            );
+                            setVariantID(addedID);
+                        }}
                     >
                         Add to Cart
                     </Button>
