@@ -10,14 +10,16 @@ export default function CartItems({ shoppingCart, items }) {
             style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
                 height: "100%",
                 padding: "1rem",
             }}
         >
-            <Box style={{ width: "90%" }}>
+            <Box
+                backgroundColor="whitesmoke"
+                style={{ width: "90%", zIndex: 1 }}
+            >
                 <Text
                     fontSize="4xl"
                     style={{
@@ -30,33 +32,48 @@ export default function CartItems({ shoppingCart, items }) {
             </Box>
             <Box
                 style={{
-                    position: "static",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
                     width: "90%",
+                    overflowY: "scroll",
                 }}
             >
                 {items.map(item => {
                     return <LineItem item={item} key={item.node.id} />;
                 })}
             </Box>
-            <Box width="80">
-                <Box style={{ right: 0 }}>
-                    <Text
-                        color="black"
-                        fontSize="lg"
-                    >{`Subtotal: $${shoppingCart.lineItemsSubtotalPrice.amount}0`}</Text>
+            <Box
+                width="90%"
+                position="fixed"
+                bottom="0"
+                paddingBottom="25px"
+                backgroundColor="whitesmoke"
+                style={{ paddingTop: "1rem", borderTop: "1px solid #eee8e4" }}
+            >
+                <Box
+                    style={{
+                        right: 0,
+                        display: "flex",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Text color="gray.800" fontSize="lg">
+                        Subtotal:
+                    </Text>
+                    <Text color="gray.800" fontSize="lg">
+                        {`$${shoppingCart.lineItemsSubtotalPrice.amount}0`}
+                    </Text>
                 </Box>
                 <Button
                     isFullWidth
                     isLoading={isLoading}
                     loadingText="Sending to checkout..."
                     spinnerPlacement="end"
-                    backgroundColor="blue.200"
-                    _hover={{ backgroundColor: "blue.300" }}
-                    borderColor="green.800"
+                    variant="outline"
+                    colorScheme="whitealpha"
+                    _hover={{ backgroundColor: "gray.200" }}
                     height="50px"
                     onClick={() => {
                         setIsLoading(true);

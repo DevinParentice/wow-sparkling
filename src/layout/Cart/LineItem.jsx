@@ -10,6 +10,7 @@ import shopifyCartUpdateItemQuery from "../../utils/shopifyCartUpdateItemQuery";
 
 export default function LineItem({ item }) {
     const [userQuantity, setUserQuantity] = useState(item.node.quantity);
+    const [disabled, setDisabled] = useState(false);
     const [, setLocation] = useLocation();
     const shoppingCart = cart(state => state.cart);
     const dispatchEditCart = cart(state => state.dispatchEditCart);
@@ -23,6 +24,7 @@ export default function LineItem({ item }) {
                     "cart",
                     JSON.stringify(data.checkoutLineItemsRemove.checkout)
                 );
+                setDisabled(false);
             }
             return true;
         },
@@ -31,34 +33,32 @@ export default function LineItem({ item }) {
 
     useEffect(() => {
         if (item.node.quantity !== userQuantity) {
-            const timeoutId = setTimeout(
-                () =>
-                    updateItem.mutate(
-                        {
-                            quantity: Number(userQuantity),
-                            productID: item.node.id,
-                            variantID: item.node.variant.id,
-                            cartID: shoppingCart.id,
-                        },
-                        {
-                            onSuccess: data => {
-                                if (data !== undefined) {
-                                    dispatchEditCart(
+            const timeoutId = setTimeout(() => {
+                updateItem.mutate(
+                    {
+                        quantity: Number(userQuantity),
+                        productID: item.node.id,
+                        variantID: item.node.variant.id,
+                        cartID: shoppingCart.id,
+                    },
+                    {
+                        onSuccess: data => {
+                            if (data !== undefined) {
+                                dispatchEditCart(
+                                    data.checkoutLineItemsUpdate.checkout
+                                );
+                                localStorage.setItem(
+                                    "cart",
+                                    JSON.stringify(
                                         data.checkoutLineItemsUpdate.checkout
-                                    );
-                                    localStorage.setItem(
-                                        "cart",
-                                        JSON.stringify(
-                                            data.checkoutLineItemsUpdate
-                                                .checkout
-                                        )
-                                    );
-                                }
-                            },
-                        }
-                    ),
-                500
-            );
+                                    )
+                                );
+                                setDisabled(false);
+                            }
+                        },
+                    }
+                );
+            }, 500);
             return () => clearTimeout(timeoutId);
         }
         return true;
@@ -98,7 +98,7 @@ export default function LineItem({ item }) {
             <Box
                 style={{
                     display: "flex",
-                    alignItems: "center",
+                    alignItems: "flex-end",
                     justifyContent: "space-between",
                     width: "100%",
                 }}
@@ -134,7 +134,8 @@ export default function LineItem({ item }) {
                         <button
                             type="button"
                             onClick={() => {
-                                if (item.node.quantity > 1) {
+                                if (item.node.quantity > 1 && !disabled) {
+                                    setDisabled(true);
                                     setUserQuantity(item.node.quantity - 1);
                                 }
                             }}
@@ -178,7 +179,8 @@ export default function LineItem({ item }) {
                         <button
                             type="button"
                             onClick={() => {
-                                if (item.node.quantity < 999) {
+                                if (item.node.quantity < 999 && !disabled) {
+                                    setDisabled(true);
                                     setUserQuantity(item.node.quantity + 1);
                                 }
                             }}
@@ -207,10 +209,13 @@ export default function LineItem({ item }) {
             >
                 <button
                     onClick={() => {
-                        removeItem.mutate({
-                            variantID: item.node.id,
-                            cartID: shoppingCart.id,
-                        });
+                        if (!disabled) {
+                            setDisabled(true);
+                            removeItem.mutate({
+                                variantID: item.node.id,
+                                cartID: shoppingCart.id,
+                            });
+                        }
                     }}
                     type="button"
                 >
