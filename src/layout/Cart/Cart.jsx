@@ -6,13 +6,15 @@ import cart from "../../stores/cart";
 import CartItems from "./CartItems";
 import EmptyCart from "./EmptyCart";
 
-export default function Cart({ showSelf, setShowSelf }) {
-    const items = cart(state => state.items);
+export default function Cart() {
+    const shoppingCart = cart(state => state.cart);
+    const showCart = cart(state => state.showCart);
+    const dispatchSetShowCart = cart(state => state.dispatchSetShowCart);
     const AnimatedBox = motion(Box);
     const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
     return (
         <AnimatePresence>
-            {showSelf && (
+            {showCart && (
                 <>
                     <AnimatedBox
                         style={{
@@ -27,7 +29,9 @@ export default function Cart({ showSelf, setShowSelf }) {
                         animate={{ opacity: 0.5 }}
                         exit={{ opacity: 0 }}
                         transition={transition}
-                        onClick={() => setShowSelf(false)}
+                        onClick={() => {
+                            dispatchSetShowCart(false);
+                        }}
                     />
                     <motion.div
                         style={{
@@ -45,8 +49,12 @@ export default function Cart({ showSelf, setShowSelf }) {
                         exit={{ x: "100%" }}
                         transition={transition}
                     >
-                        {items.length === 0 && <EmptyCart />}
-                        {items.length > 0 && <CartItems items={items} />}
+                        {shoppingCart.lineItems.edges.length === 0 && (
+                            <EmptyCart />
+                        )}
+                        {shoppingCart.lineItems.edges.length > 0 && (
+                            <CartItems items={shoppingCart.lineItems.edges} />
+                        )}
                     </motion.div>
                 </>
             )}

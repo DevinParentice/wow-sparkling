@@ -16,18 +16,25 @@ import { useMutation } from "react-query";
 import { useLocation } from "wouter";
 
 import cart from "../../stores/cart";
+import shopifyCartAddItemQuery from "../../utils/shopifyCartAddItemQuery";
+import shopifyCartCreateQuery from "../../utils/shopifyCartCreateQuery";
 import RadioCard from "./Radiocard";
 
 export default function Form({ product }) {
-    const [packNumber, setPackNumber] = useState(0);
+    const [packNumber, setPackNumber] = useState(
+        product.priceRange.minVariantPrice.amount
+    );
     const [quantity, setQuantity] = useState(1);
-    const [variant, setVariant] = useState("");
+    const [variant, setVariant] = useState("12 Pack");
     const [variantID, setVariantID] = useState("");
-    const [total, setTotal] = useState(0);
+    const [itemsAdded, setItemsAdded] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
+    const [total, setTotal] = useState(1);
     const options = ["12 Pack", "24 Pack"];
     const AnimatedBox = motion(Box);
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "packs",
+        defaultValue: "12 Pack",
         onChange: choice => {
             setTotal(total === 0 ? 1 : total);
             if (choice === "12 Pack") {
@@ -41,100 +48,45 @@ export default function Form({ product }) {
     });
     const group = getRootProps();
     const [, setLocation] = useLocation();
-    const dispatchAddItem = cart(state => state.dispatchAddItem);
-    const dispatchSetCartID = cart(state => state.dispatchSetCartID);
-    const cartID = cart(state => state.cartID);
-    const createShopifyCart = useMutation(
-        () => {
-            return fetch(__SNOWPACK_ENV__.API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Shopify-Storefront-Access-Token":
-                        __SNOWPACK_ENV__.ACCESS_TOKEN,
-                },
-                body: JSON.stringify({
-                    query: `mutation checkoutCreate($input: CheckoutCreateInput = {
-					lineItems: [{quantity: ${quantity}, variantId: "${variantID}"}]
-				  }) {
-					checkoutCreate(input: $input) {
-						checkout {
-							id
-							webUrl
-							lineItems(first: 8) {
-							  edges {
-								node {
-								  id
-								  title
-								  quantity
-								}
-							  }
-							}
-							lineItemsSubtotalPrice {
-							  amount
-							  currencyCode
-							}
-						  }
-						  checkoutUserErrors {
-							code
-							field
-							message
-						  }
-						  queueToken
-						}
-				  }`,
-                }),
-            })
-                .then(response => response.json())
-                .then(response => response.data);
+    const dispatchEditCart = cart(state => state.dispatchEditCart);
+    const dispatchSetShowCart = cart(state => state.dispatchSetShowCart);
+    const shoppingCart = cart(state => state.cart);
+    const createShopifyCart = useMutation(shopifyCartCreateQuery, {
+        onSuccess: data => {
+            if (data !== undefined) {
+                dispatchEditCart(data.checkoutCreate.checkout);
+                dispatchSetShowCart(true);
+                setIsLoading(false);
+            }
         },
-        {
-            onSuccess: data => {
-                dispatchSetCartID(data.checkoutCreate.checkout.id);
-            },
-        }
-    );
-    const addItemToShopifyCart = useMutation(() => {
-        return fetch(__SNOWPACK_ENV__.API_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-Shopify-Storefront-Access-Token":
-                    __SNOWPACK_ENV__.ACCESS_TOKEN,
-            },
-            body: JSON.stringify({
-                query: `mutation checkoutLineItemsAdd($lineItems: [CheckoutLineItemInput!]!, $checkoutId: ID!) {
-						checkoutLineItemsAdd(lineItems: $lineItems, checkoutId: $checkoutId) {
-						  checkout {
-							id
-							webUrl
-						  }
-						  checkoutUserErrors {
-							code
-							field
-							message
-						  }
-						}
-					  }`,
-                variables: {
-                    lineItems: [
-                        {
-                            quantity,
-                            variantId: variantID,
-                        },
-                    ],
-                    checkoutId: cartID,
-                },
-            }),
-        });
+    });
+    const addItemToShopifyCart = useMutation(shopifyCartAddItemQuery, {
+        onSuccess: data => {
+            if (data !== undefined) {
+                dispatchEditCart(data.checkoutLineItemsAdd.checkout);
+                dispatchSetShowCart(true);
+                setIsLoading(false);
+            }
+        },
     });
     useEffect(() => {
-        if (cartID === "") {
-            createShopifyCart.mutate();
+        if (shoppingCart.id === "") {
+            createShopifyCart.mutate({ quantity, variantID });
         } else {
-            addItemToShopifyCart.mutate();
+            addItemToShopifyCart.mutate({
+                quantity,
+                variantID,
+                cartID: shoppingCart.id,
+            });
         }
-    }, [variantID]);
+    }, [
+        itemsAdded,
+        addItemToShopifyCart,
+        createShopifyCart,
+        quantity,
+        shoppingCart.id,
+        variantID,
+    ]);
     return (
         <div
             style={{
@@ -274,7 +226,7 @@ export default function Form({ product }) {
                                     event.target.value < 999 &&
                                     event.target.value > 1
                                 ) {
-                                    setQuantity(event.target.value);
+                                    setQuantity(event.target.value * 1);
                                 }
                             }}
                             value={quantity}
@@ -323,23 +275,17 @@ export default function Form({ product }) {
                         colorScheme="whitealpha"
                         size="lg"
                         boxShadow="lg"
+                        isLoading={isLoading}
+                        loadingText="Adding to cart..."
+                        spinnerPlacement="end"
                         onClick={() => {
-                            dispatchAddItem({
-                                product,
-                                price: packNumber * 1,
-                                total: total * packNumber * quantity * 1,
-                                quantity,
-                                variant,
-                            });
-                            const addedID = product.variants.edges.map(
-                                nestedVariant => {
-                                    if (nestedVariant.node.title === variant) {
-                                        return nestedVariant.node.id;
-                                    }
-                                    return null;
+                            setIsLoading(true);
+                            for (const vID of product.variants.edges) {
+                                if (vID.node.title === variant) {
+                                    setVariantID(vID.node.id);
+                                    setItemsAdded(count => count + 1);
                                 }
-                            );
-                            setVariantID(addedID);
+                            }
                         }}
                     >
                         Add to Cart

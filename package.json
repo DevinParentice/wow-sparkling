@@ -65,6 +65,9 @@
             "pre-commit": "lint-staged"
         }
     },
+    "eslintConfig": {
+        "extends": "plugin:unicorn/recommended"
+    },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
             "prettier --write",

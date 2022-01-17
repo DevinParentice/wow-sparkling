@@ -1,23 +1,24 @@
 import create from "zustand";
 
 export const cart = create(set => ({
-    cartID: "",
-    items: [],
-    dispatchAddItem: item =>
-        set(state => ({
-            items: [...state.items, item],
-        })),
-    dispatchRemoveItem: item =>
-        set(state => ({
-            items: state.items.filter(index => index !== item),
-        })),
-    dispatchEditItem: (item, newItem) =>
-        set(state => ({
-            items: state.items.map(index => (index === item ? newItem : index)),
-        })),
-    dispatchSetCartID: id =>
+    cart: {
+        id: "",
+        webUrl: "",
+        lineItems: { edges: [] },
+        lineItemsSubtotalPrice: {
+            amount: 0,
+            currencyCode: "",
+        },
+    },
+    showCart: false,
+    dispatchEditCart: newCart => {
         set(() => ({
-            cartID: id,
+            cart: newCart,
+        }));
+    },
+    dispatchSetShowCart: show =>
+        set(() => ({
+            showCart: show,
         })),
 }));
 

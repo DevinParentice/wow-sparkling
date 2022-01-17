@@ -48,5 +48,7 @@ module.exports = {
         "unicorn/no-null": "off",
         "unicorn/no-abusive-eslint-disable": "off",
         "no-param-reassign": "off",
+        "no-unused-expressions": "off",
+        "no-restricted-syntax": "off",
     },
 };

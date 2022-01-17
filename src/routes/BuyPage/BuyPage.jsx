@@ -24,6 +24,7 @@ export default function BuyPage() {
 					products(first:1, query:"tag:${location.split("/")[2]}") {
 						edges {
 							node {
+							  id
 							  title
 							  description
 							  tags

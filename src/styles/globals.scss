@@ -33,14 +33,14 @@ body {
 
 @include mixins.font-face(
 	"Sharp Grotesk Regular",
-    "/fonts/SharpGroteskRegular",
-    normal,
+	"/fonts/SharpGroteskRegular",
+	normal,
     normal
 );
 
 @include mixins.font-face(
 	"Sharp Grotesk Book",
-    "/fonts/SharpGroteskBook",
-    normal,
+	"/fonts/SharpGroteskBook",
+	normal,
     normal
 );
