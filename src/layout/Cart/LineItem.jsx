@@ -19,6 +19,10 @@ export default function LineItem({ item }) {
         onSuccess: data => {
             if (data !== undefined) {
                 dispatchEditCart(data.checkoutLineItemsRemove.checkout);
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(data.checkoutLineItemsRemove.checkout)
+                );
             }
             return true;
         },
@@ -42,6 +46,13 @@ export default function LineItem({ item }) {
                                     dispatchEditCart(
                                         data.checkoutLineItemsUpdate.checkout
                                     );
+                                    localStorage.setItem(
+                                        "cart",
+                                        JSON.stringify(
+                                            data.checkoutLineItemsUpdate
+                                                .checkout
+                                        )
+                                    );
                                 }
                             },
                         }
@@ -51,15 +62,7 @@ export default function LineItem({ item }) {
             return () => clearTimeout(timeoutId);
         }
         return true;
-    }, [
-        userQuantity,
-        dispatchEditCart,
-        item.node.id,
-        item.node.quantity,
-        item.node.variant.id,
-        shoppingCart.id,
-        updateItem,
-    ]);
+    }, [userQuantity]);
 
     return (
         <Box

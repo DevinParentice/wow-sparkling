@@ -1,17 +1,26 @@
 import { Box } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 
 import cart from "../../stores/cart";
 import CartItems from "./CartItems";
 import EmptyCart from "./EmptyCart";
 
 export default function Cart() {
-    const shoppingCart = cart(state => state.cart);
-    const showCart = cart(state => state.showCart);
     const dispatchSetShowCart = cart(state => state.dispatchSetShowCart);
+    const dispatchEditCart = cart(state => state.dispatchEditCart);
+    const showCart = cart(state => state.showCart);
+
+    useEffect(() => {
+        if (localStorage.getItem("cart") !== null) {
+            dispatchEditCart(JSON.parse(localStorage.getItem("cart")));
+        }
+    }, []);
+
+    const shoppingCart = cart(state => state.cart);
     const AnimatedBox = motion(Box);
     const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+
     return (
         <AnimatePresence>
             {showCart && (
@@ -53,7 +62,10 @@ export default function Cart() {
                             <EmptyCart />
                         )}
                         {shoppingCart.lineItems.edges.length > 0 && (
-                            <CartItems items={shoppingCart.lineItems.edges} />
+                            <CartItems
+                                shoppingCart={shoppingCart}
+                                items={shoppingCart.lineItems.edges}
+                            />
                         )}
                     </motion.div>
                 </>

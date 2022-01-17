@@ -50,5 +50,6 @@ module.exports = {
         "no-param-reassign": "off",
         "no-unused-expressions": "off",
         "no-restricted-syntax": "off",
+        "react-hooks/exhaustive-deps": "off",
     },
 };

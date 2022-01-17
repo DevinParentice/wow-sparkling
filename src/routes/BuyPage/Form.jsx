@@ -55,6 +55,10 @@ export default function Form({ product }) {
         onSuccess: data => {
             if (data !== undefined) {
                 dispatchEditCart(data.checkoutCreate.checkout);
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(data.checkoutCreate.checkout)
+                );
                 dispatchSetShowCart(true);
                 setIsLoading(false);
             }
@@ -64,6 +68,10 @@ export default function Form({ product }) {
         onSuccess: data => {
             if (data !== undefined) {
                 dispatchEditCart(data.checkoutLineItemsAdd.checkout);
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(data.checkoutLineItemsAdd.checkout)
+                );
                 dispatchSetShowCart(true);
                 setIsLoading(false);
             }
@@ -79,14 +87,7 @@ export default function Form({ product }) {
                 cartID: shoppingCart.id,
             });
         }
-    }, [
-        itemsAdded,
-        addItemToShopifyCart,
-        createShopifyCart,
-        quantity,
-        shoppingCart.id,
-        variantID,
-    ]);
+    }, [itemsAdded]);
     return (
         <div
             style={{
@@ -99,7 +100,6 @@ export default function Form({ product }) {
                 zIndex: 3,
             }}
         >
-            <p style={{ color: "black", fontSize: "2rem" }} />
             <AnimatedBox
                 bg="whitesmoke"
                 p="2rem"

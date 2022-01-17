@@ -1,12 +1,10 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-import cart from "../../stores/cart";
 import LineItem from "./LineItem";
 
-export default function CartItems({ items }) {
+export default function CartItems({ shoppingCart, items }) {
     const [isLoading, setIsLoading] = useState(false);
-    const shoppingCart = cart(state => state.cart);
     return (
         <Box
             style={{
