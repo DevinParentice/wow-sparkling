@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 
 import CartIcon from "../../assets/icons/CartIcon";
@@ -12,13 +12,30 @@ import Menu from "../Menu";
 
 export default function Header() {
     const [showMenu, setShowMenu] = useState(false);
+    const [bgColor, setBgColor] = useState("");
     const showCart = cart(state => state.showCart);
     const fadeIn = { delay: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+
+    const handleScroll = () => {
+        if (window.pageYOffset >= 870) {
+            setBgColor("whitesmoke");
+        } else {
+            setBgColor("");
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
         <motion.div
             style={{
                 width: "100vw",
-                height: "4rem",
+                height: "6rem",
                 position: "fixed",
                 top: 0,
                 left: 0,
@@ -28,15 +45,22 @@ export default function Header() {
                 alignItems: "center",
                 padding: "0 5rem",
                 paddingTop: "2rem",
+                paddingBottom: "2rem",
+                backgroundColor: bgColor,
+                transition: "background-color 0.5s",
+                borderBottom: bgColor !== "" ? "1px solid grey" : "",
             }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: fadeIn }}
+            animate={{
+                opacity: 1,
+                transition: fadeIn,
+            }}
         >
             <div style={{ zIndex: 6 }}>
                 <Hamburger
                     toggled={showMenu}
                     toggle={setShowMenu}
-                    color={showMenu ? "#1A202C" : "white"}
+                    color={bgColor !== "" || showMenu ? "#1A202C" : "white"}
                     size={42}
                     rounded
                     label="Show Menu"
@@ -46,14 +70,20 @@ export default function Header() {
                 <Link to="/">
                     <a>
                         <img
-                            src={showMenu ? BlackLogo : WhiteLogo}
+                            src={
+                                bgColor !== "" || showMenu
+                                    ? BlackLogo
+                                    : WhiteLogo
+                            }
                             alt="Logo"
                             height="50px"
                         />
                     </a>
                 </Link>
             </div>
-            <CartIcon iconColor={showCart ? "#1A202C" : "#fff"} />
+            <CartIcon
+                iconColor={bgColor !== "" || showCart ? "#1A202C" : "#fff"}
+            />
             {showMenu && (
                 <motion.div
                     style={{

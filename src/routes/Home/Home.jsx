@@ -1,6 +1,7 @@
 import "./Home.scss";
 
-import { Text } from "@chakra-ui/react";
+import { TriangleDownIcon } from "@chakra-ui/icons";
+import { Box, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "wouter";
@@ -15,6 +16,17 @@ export default function Home() {
         ease: [0.43, 0.13, 0.23, 0.96],
         scale: { delay: 0 },
     };
+    const variants = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.5,
+            },
+        },
+    };
+
     return (
         <>
             <div
@@ -24,9 +36,15 @@ export default function Home() {
                     position: "relative",
                     backgroundColor: "#eeeeee",
                 }}
+                variants={variants}
+                initial="hidden"
+                animate="show"
             >
-                <Background canvasID="gradient-canvas-main" />
-                <div style={{ display: "flex", zIndex: 2 }}>
+                <Background
+                    canvasID="gradient-canvas-main"
+                    variants={variants}
+                />
+                <div style={{ display: "flex", zIndex: 2 }} variants={variants}>
                     <div
                         style={{
                             width: "50vw",
@@ -127,13 +145,15 @@ export default function Home() {
                         bottom: 0,
                         width: "100%",
                     }}
+                    variants={variants}
                 >
                     <svg
                         preserveAspectRatio="none"
                         viewBox="0 0 1200 120"
                         xmlns="http://www.w3.org/2000/svg"
+                        className="svg-wave"
                         style={{
-                            fill: "#f1c7b9",
+                            fill: "whitesmoke",
                             width: "100%",
                             height: 107,
                             transform: "rotate(180deg)",
@@ -143,13 +163,40 @@ export default function Home() {
                     </svg>
                 </div>
             </div>
-            <div
+            {/* f1c7b9 */}
+            <Box
+                display="flex"
+                justifyContent="center"
                 style={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundColor: "#f1c7b9",
+                    backgroundColor: "whitesmoke",
                 }}
-            />
+            >
+                <Box
+                    className="text-shadow-body"
+                    maxW="50%"
+                    textAlign="center"
+                    paddingTop="2.5rem"
+                >
+                    <Text as="h3" color="gray.800" fontSize="4xl">
+                        Everyone deserves a beverage that respects our right to
+                        choose.
+                    </Text>
+                    <TriangleDownIcon
+                        color="whitesmoke"
+                        w={6}
+                        h={6}
+                        marginRight="1"
+                    />
+                    <TriangleDownIcon
+                        color="whitesmoke"
+                        w={6}
+                        h={6}
+                        marginLeft="1"
+                    />
+                </Box>
+            </Box>
         </>
     );
 }

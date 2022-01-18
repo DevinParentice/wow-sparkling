@@ -24,7 +24,6 @@ export default function LineItem({ item }) {
                     "cart",
                     JSON.stringify(data.checkoutLineItemsRemove.checkout)
                 );
-                setDisabled(false);
             }
             return true;
         },
