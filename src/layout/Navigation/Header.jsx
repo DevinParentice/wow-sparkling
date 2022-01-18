@@ -20,7 +20,7 @@ export default function Header() {
 
     const handleScroll = () => {
         if (window.pageYOffset >= 870) {
-            setBgColor("#ace");
+            setBgColor("#f1d7cd");
         } else {
             setBgColor("");
         }

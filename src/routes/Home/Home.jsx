@@ -1,7 +1,7 @@
 import "./Home.scss";
 
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Divider, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "wouter";
@@ -153,7 +153,7 @@ export default function Home() {
                         xmlns="http://www.w3.org/2000/svg"
                         className="svg-wave"
                         style={{
-                            fill: "#ace",
+                            fill: "#f1d7cd",
                             width: "100%",
                             height: 107,
                             transform: "rotate(180deg)",
@@ -166,36 +166,83 @@ export default function Home() {
             {/* f1c7b9 */}
             <Box
                 display="flex"
-                justifyContent="center"
+                flexDirection="column"
+                alignItems="center"
                 className="home-box"
                 style={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundColor: "#ace",
+                    backgroundColor: "#f1d7cd",
                 }}
             >
                 <Box
                     className="text-shadow-body"
                     maxW="50%"
                     textAlign="center"
-                    paddingTop="2.5rem"
+                    paddingTop="5.5rem"
                 >
                     <Text as="h3" color="gray.800" fontSize="4xl">
                         Everyone deserves a beverage that respects our right to
                         choose.
                     </Text>
                     <TriangleDownIcon
-                        color="whitesmoke"
+                        color="gray.800"
                         w={6}
                         h={6}
                         marginRight="1"
                     />
                     <TriangleDownIcon
-                        color="whitesmoke"
+                        color="gray.800"
                         w={6}
                         h={6}
                         marginLeft="1"
                     />
+                </Box>
+                <Box display="flex" width="100%" height="100%">
+                    <Box
+                        width="50%"
+                        height="100%"
+                        display="flex"
+                        justifyContent="center"
+                    >
+                        <Text fontSize="4rem" className="text-shadow">
+                            With
+                        </Text>
+                    </Box>
+                    <Box
+                        display="flex"
+                        flexDirection="column"
+                        alignContent="center"
+                        height="100%"
+                    >
+                        <Divider
+                            orientation="vertical"
+                            opacity="0.8"
+                            border="2px"
+                            borderColor="gray.800"
+                            margin="auto"
+                        />
+                        <Text fontSize="4rem" className="text-shadow">
+                            Or
+                        </Text>
+                        <Divider
+                            orientation="vertical"
+                            opacity="0.8"
+                            border="2px"
+                            borderColor="gray.800"
+                            margin="auto"
+                        />
+                    </Box>
+                    <Box
+                        width="50%"
+                        height="100%"
+                        display="flex"
+                        justifyContent="center"
+                    >
+                        <Text fontSize="4rem" className="text-shadow">
+                            Without
+                        </Text>
+                    </Box>
                 </Box>
             </Box>
         </>
