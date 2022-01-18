@@ -153,7 +153,7 @@ export default function Home() {
                         xmlns="http://www.w3.org/2000/svg"
                         className="svg-wave"
                         style={{
-                            fill: "whitesmoke",
+                            fill: "#ace",
                             width: "100%",
                             height: 107,
                             transform: "rotate(180deg)",
@@ -167,10 +167,11 @@ export default function Home() {
             <Box
                 display="flex"
                 justifyContent="center"
+                className="home-box"
                 style={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundColor: "whitesmoke",
+                    backgroundColor: "#ace",
                 }}
             >
                 <Box

@@ -1,3 +1,5 @@
+import "./Header.scss";
+
 import { motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useState } from "react";
@@ -18,7 +20,7 @@ export default function Header() {
 
     const handleScroll = () => {
         if (window.pageYOffset >= 870) {
-            setBgColor("whitesmoke");
+            setBgColor("#ace");
         } else {
             setBgColor("");
         }
@@ -32,7 +34,7 @@ export default function Header() {
     }, []);
 
     return (
-        <motion.div
+        <motion.nav
             style={{
                 width: "100vw",
                 height: "6rem",
@@ -48,7 +50,6 @@ export default function Header() {
                 paddingBottom: "2rem",
                 backgroundColor: bgColor,
                 transition: "background-color 0.5s",
-                borderBottom: bgColor !== "" ? "1px solid grey" : "",
             }}
             initial={{ opacity: 0 }}
             animate={{
@@ -111,6 +112,6 @@ export default function Header() {
             )}
             <Cart />
             <Menu showSelf={showMenu} setShowSelf={setShowMenu} />
-        </motion.div>
+        </motion.nav>
     );
 }

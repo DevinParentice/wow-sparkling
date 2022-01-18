@@ -10,7 +10,10 @@ export default function ShoppingBag3FillIcon({ iconColor }) {
     return (
         <motion.svg
             viewBox="0 0 24 24"
-            style={{ zIndex: 4 }}
+            style={{
+                zIndex: 4,
+                transition: "fill 0.4s cubic-bezier(0, 0, 0, 1) 0s",
+            }}
             fill={iconColor}
             height="3em"
             width="3em"
