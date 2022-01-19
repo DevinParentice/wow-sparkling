@@ -33,6 +33,7 @@ export default function Cart() {
                             top: 0,
                             left: 0,
                             backgroundColor: "black",
+                            zIndex: "7",
                         }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 0.5 }}
@@ -49,7 +50,7 @@ export default function Cart() {
                             position: "fixed",
                             top: 0,
                             right: 0,
-                            zIndex: 3,
+                            zIndex: 8,
                             backgroundColor: "whitesmoke",
                         }}
                         key="cart"

@@ -51,5 +51,6 @@ module.exports = {
         "no-unused-expressions": "off",
         "no-restricted-syntax": "off",
         "react-hooks/exhaustive-deps": "off",
+        "jsx-a11y/no-noninteractive-tabindex": "off",
     },
 };

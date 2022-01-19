@@ -11,6 +11,7 @@ import NewCanvas from "../../layout/NewCanvas";
 
 export default function Home() {
     const MotionText = motion(Text);
+    const MotionDivider = motion(Divider);
     const fadeIn = {
         duration: 0.6,
         ease: [0.43, 0.13, 0.23, 0.96],
@@ -29,7 +30,8 @@ export default function Home() {
 
     return (
         <>
-            <div
+            <Box
+                as="main"
                 style={{
                     width: "100vw",
                     height: "100vh",
@@ -162,9 +164,10 @@ export default function Home() {
                         <path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" />
                     </svg>
                 </div>
-            </div>
+            </Box>
             {/* f1c7b9 */}
             <Box
+                as="section"
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
@@ -177,14 +180,26 @@ export default function Home() {
             >
                 <Box
                     className="text-shadow-body"
-                    maxW="50%"
+                    maxW="53rem"
                     textAlign="center"
                     paddingTop="5.5rem"
                 >
-                    <Text as="h3" color="gray.800" fontSize="4xl">
-                        Everyone deserves a beverage that respects our right to
-                        choose.
-                    </Text>
+                    <MotionText
+                        as="h3"
+                        color="gray.800"
+                        fontSize="4xl"
+                        initial="hidden"
+                        whileInView="visible"
+                        transition={{ delay: 0.5, ...fadeIn }}
+                        viewport={{ once: true }}
+                        variants={{
+                            visible: { opacity: 1, scale: 1 },
+                            hidden: { opacity: 0, scale: 0 },
+                        }}
+                    >
+                        Everyone deserves a beverage that respects their right
+                        to choose.
+                    </MotionText>
                     <TriangleDownIcon
                         color="gray.800"
                         w={6}
@@ -205,33 +220,74 @@ export default function Home() {
                         display="flex"
                         justifyContent="center"
                     >
-                        <Text fontSize="4rem" className="text-shadow">
+                        <MotionText
+                            fontSize="4rem"
+                            className="text-shadow"
+                            initial="hidden"
+                            whileInView="visible"
+                            transition={{ delay: 0.75, ...fadeIn }}
+                            viewport={{ once: true }}
+                            variants={{
+                                visible: { opacity: 1, scale: 1, x: 0 },
+                                hidden: { opacity: 0, scale: 0, x: -20 },
+                            }}
+                        >
                             With
-                        </Text>
+                        </MotionText>
                     </Box>
-                    <Box
-                        display="flex"
-                        flexDirection="column"
-                        alignContent="center"
-                        height="100%"
-                    >
-                        <Divider
-                            orientation="vertical"
-                            opacity="0.8"
-                            border="2px"
-                            borderColor="gray.800"
-                            margin="auto"
-                        />
-                        <Text fontSize="4rem" className="text-shadow">
-                            Or
-                        </Text>
-                        <Divider
-                            orientation="vertical"
-                            opacity="0.8"
-                            border="2px"
-                            borderColor="gray.800"
-                            margin="auto"
-                        />
+                    <Box height="100%" display="flex" alignItems="center">
+                        <Box
+                            height="80%"
+                            display="flex"
+                            flexDirection="column"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <MotionDivider
+                                orientation="vertical"
+                                opacity="0.8"
+                                border="2px"
+                                borderColor="gray.800"
+                                margin="auto"
+                                initial="hidden"
+                                whileInView="visible"
+                                transition={{ delay: 1, ...fadeIn }}
+                                viewport={{ once: true }}
+                                variants={{
+                                    visible: { opacity: 1, scale: 1 },
+                                    hidden: { opacity: 0, scale: 0 },
+                                }}
+                            />
+                            <MotionText
+                                fontSize="4rem"
+                                className="text-shadow"
+                                initial="hidden"
+                                whileInView="visible"
+                                transition={{ delay: 1.25, ...fadeIn }}
+                                viewport={{ once: true }}
+                                variants={{
+                                    visible: { opacity: 1, scale: 1 },
+                                    hidden: { opacity: 0, scale: 0 },
+                                }}
+                            >
+                                Or
+                            </MotionText>
+                            <MotionDivider
+                                orientation="vertical"
+                                opacity="0.8"
+                                border="2px"
+                                borderColor="gray.800"
+                                margin="auto"
+                                initial="hidden"
+                                whileInView="visible"
+                                transition={{ delay: 1.5, ...fadeIn }}
+                                viewport={{ once: true }}
+                                variants={{
+                                    visible: { opacity: 1, scale: 1 },
+                                    hidden: { opacity: 0, scale: 0 },
+                                }}
+                            />
+                        </Box>
                     </Box>
                     <Box
                         width="50%"
@@ -239,9 +295,20 @@ export default function Home() {
                         display="flex"
                         justifyContent="center"
                     >
-                        <Text fontSize="4rem" className="text-shadow">
+                        <MotionText
+                            fontSize="4rem"
+                            className="text-shadow"
+                            initial="hidden"
+                            whileInView="visible"
+                            transition={{ delay: 1.75, ...fadeIn }}
+                            viewport={{ once: true }}
+                            variants={{
+                                visible: { opacity: 1, scale: 1, x: 0 },
+                                hidden: { opacity: 0, scale: 0, x: 20 },
+                            }}
+                        >
                             Without
-                        </Text>
+                        </MotionText>
                     </Box>
                 </Box>
             </Box>

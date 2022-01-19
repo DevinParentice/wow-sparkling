@@ -34,7 +34,7 @@ export default function Header() {
     }, []);
 
     return (
-        <motion.nav
+        <motion.header
             style={{
                 width: "100vw",
                 height: "6rem",
@@ -57,7 +57,16 @@ export default function Header() {
                 transition: fadeIn,
             }}
         >
-            <div style={{ zIndex: 6 }}>
+            <div
+                style={{ zIndex: 6 }}
+                tabIndex="0"
+                role="button"
+                onKeyDown={event => {
+                    if (event.key === "Enter") {
+                        setShowMenu(!showMenu);
+                    }
+                }}
+            >
                 <Hamburger
                     toggled={showMenu}
                     toggle={setShowMenu}
@@ -112,6 +121,6 @@ export default function Header() {
             )}
             <Cart />
             <Menu showSelf={showMenu} setShowSelf={setShowMenu} />
-        </motion.nav>
+        </motion.header>
     );
 }
