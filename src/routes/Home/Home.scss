@@ -5,6 +5,29 @@
 	filter: drop-shadow(0 3px 6px rgb(80, 72, 72));
 }
 
+.wow-text {
+	color: inherit;
+	display: inline-block;
+	font-family: "Sharp Grotesk Regular", sans-serif;
+	font-size: 150px;
+	font-style: normal;
+	font-weight: 800;
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+
+.text-with {
+	left: 5%;
+	top: 40%;
+}
+
+.text-without {
+	left: 60%;
+	line-height: 80%;
+	text-align: center;
+	top: 40%;
+}
+
 .icon-scroll {
 	border-radius: 25px;
 	box-shadow: inset 0 0 0 1px #fff;

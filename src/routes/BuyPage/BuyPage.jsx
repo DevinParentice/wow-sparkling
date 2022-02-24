@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { useLocation } from "wouter";
 
 import Background from "../../components/Background";
+import shopifyItemQuery from "../../utils/shopifyItemQuery";
 import CanDisplay from "./CanDisplay";
 import Form from "./Form";
 import ProductCopy from "./ProductCopy";
@@ -11,61 +12,7 @@ import ProductCopy from "./ProductCopy";
 export default function BuyPage() {
     const [location, ,] = useLocation();
     const { isSuccess, data } = useQuery(["data", location], () =>
-        fetch(__SNOWPACK_ENV__.API_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-Shopify-Storefront-Access-Token":
-                    __SNOWPACK_ENV__.ACCESS_TOKEN,
-            },
-            body: JSON.stringify({
-                query: `
-				query product {
-					products(first:1, query:"tag:${location.split("/")[2]}") {
-						edges {
-							node {
-							  id
-							  title
-							  description
-							  tags
-							  handle
-							  variants(first: 2) {
-								edges {
-								  node {
-									title
-									id
-									priceV2 {
-									  amount
-									  currencyCode
-									}
-								  }
-								}
-							  }
-							  priceRange {
-								minVariantPrice {
-								  amount
-								}
-								maxVariantPrice {
-								  amount
-								}
-							  }
-							  images(first: 1) {
-								edges {
-								  node {
-									url
-									altText
-								  }
-								}
-							  }
-							}
-						  }
-					}
-				  }
-			`,
-            }),
-        })
-            .then(response => response.json())
-            .then(response => response.data)
+        shopifyItemQuery({ location })
     );
     const fadeIn = {
         duration: 0.6,

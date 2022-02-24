@@ -7,6 +7,7 @@ import { Route, Switch, useLocation } from "wouter";
 import Header from "./layout/Navigation/Header";
 import BuyPage from "./routes/BuyPage/BuyPage";
 import Catalog from "./routes/Catalog/Catalog";
+import Error404 from "./routes/Errors/Error404";
 import Home from "./routes/Home/Home";
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
                     <Route path="/" component={Home} />
                     <Route path="/shop/:flavor" component={BuyPage} />
                     <Route path="/shop" component={Catalog} />
-                    <Route>404, Sorry the page does not exist!</Route>
+                    <Route component={Error404} />
                 </Switch>
             </>
         </AnimatePresence>
