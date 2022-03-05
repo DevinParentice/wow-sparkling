@@ -3,7 +3,7 @@ import "./Header.scss";
 import { motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
 import React, { useEffect, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 import CartIcon from "../../assets/icons/CartIcon";
 import BlackLogo from "../../assets/images/wow-logo-black.png";
@@ -16,6 +16,7 @@ import Menu from "../Menu";
 
 export default function Header() {
     const [showMenu, setShowMenu] = useState(false);
+    const [location] = useLocation();
     const showCart = cart(state => state.showCart);
     const backgroundColor = uiElements(state => state.backgroundColor);
     const dispatchSetBackgroundColor = uiElements(
@@ -36,12 +37,14 @@ export default function Header() {
     const fadeIn = { delay: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
     const handleScroll = () => {
-        if (window.pageYOffset >= 1750) {
-            dispatchSetBackgroundColor("#a2b0ff");
-        } else if (window.pageYOffset >= 870) {
-            dispatchSetBackgroundColor("#eca3b4");
-        } else {
-            dispatchSetBackgroundColor("");
+        if (location === "/") {
+            if (window.pageYOffset >= 1750) {
+                dispatchSetBackgroundColor("#a2b0ff");
+            } else if (window.pageYOffset >= 870) {
+                dispatchSetBackgroundColor("#eca3b4");
+            } else {
+                dispatchSetBackgroundColor("");
+            }
         }
     };
 
@@ -101,7 +104,11 @@ export default function Header() {
                         dispatchShowPineapple(false);
                     }}
                     color={
-                        backgroundColor !== "" || showMenu ? "#1A202C" : "white"
+                        backgroundColor !== "" ||
+                        showMenu ||
+                        location === "/shop"
+                            ? "#1A202C"
+                            : "white"
                     }
                     size={42}
                     rounded
@@ -122,7 +129,9 @@ export default function Header() {
                     >
                         <img
                             src={
-                                backgroundColor !== "" || showMenu
+                                backgroundColor !== "" ||
+                                showMenu ||
+                                location === "/shop"
                                     ? BlackLogo
                                     : WhiteLogo
                             }
@@ -134,7 +143,9 @@ export default function Header() {
             </div>
             <CartIcon
                 iconColor={
-                    backgroundColor !== "" || showCart ? "#1A202C" : "#fff"
+                    backgroundColor !== "" || showCart || location === "/shop"
+                        ? "#1A202C"
+                        : "#fff"
                 }
             />
             {showMenu && (
