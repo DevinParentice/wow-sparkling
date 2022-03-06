@@ -106,7 +106,8 @@ export default function Header() {
                     color={
                         backgroundColor !== "" ||
                         showMenu ||
-                        location === "/shop"
+                        location === "/shop" ||
+                        location === "/story"
                             ? "#1A202C"
                             : "white"
                     }
@@ -131,7 +132,8 @@ export default function Header() {
                             src={
                                 backgroundColor !== "" ||
                                 showMenu ||
-                                location === "/shop"
+                                location === "/shop" ||
+                                location === "/story"
                                     ? BlackLogo
                                     : WhiteLogo
                             }
@@ -143,7 +145,10 @@ export default function Header() {
             </div>
             <CartIcon
                 iconColor={
-                    backgroundColor !== "" || showCart || location === "/shop"
+                    backgroundColor !== "" ||
+                    showCart ||
+                    location === "/shop" ||
+                    location === "/story"
                         ? "#1A202C"
                         : "#fff"
                 }
